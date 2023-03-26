@@ -35,7 +35,8 @@ private:
 public:
 	static EventManager* Instance();
 
-	void InvokeEvent(std::string eventName, BaseEvent* baseEvent);
-	void AddListener(std::string eventName, void (*func)(BaseEvent*));
-	void RemoveListener(std::string eventName, void (*func)(BaseEvent*));
+	void InvokeEvent(BaseEvent* baseEvent);
+	template <typename T> void AddListener(void (*func)(T*));
+	template <typename T> void RemoveListener(void (*func)(T*));
 };
+

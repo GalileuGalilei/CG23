@@ -3,8 +3,8 @@
 
 std::string BaseEvent::GetName()
 {
-	std::string name = "BaseEvent";
-	return name;
+	std::string str = "BaseEvent";
+	return str;
 }
 
 EventManager* EventManager::instance = NULL;
@@ -19,9 +19,9 @@ EventManager* EventManager::Instance()
 	return instance;
 }
 
-void EventManager::InvokeEvent(BaseEvent* baseEvent)
+void EventManager::InvokeEvent(std::string eventName, BaseEvent* baseEvent)
 {
-	auto functions = events[baseEvent->GetName()];
+	auto functions = events[eventName];
 
 	for (auto f : functions)
 	{
@@ -29,22 +29,22 @@ void EventManager::InvokeEvent(BaseEvent* baseEvent)
 	}
 }
 
-void EventManager::AddListener(BaseEvent* baseEvent,void (*func)(BaseEvent*))
-{
-	if (events.find(baseEvent->GetName()) == events.end())
+void EventManager::AddListener(std::string eventName, void (*func)(BaseEvent*))
+{	
+	if (events.find(eventName) == events.end())
 	{
-		events.emplace(std::make_pair(baseEvent->GetName(), new std::list<void (*)(BaseEvent*)>{ func }));
+		events.emplace(std::make_pair(eventName, new std::list<void (*)(BaseEvent*)>{ func }));
 	}
 	else
 	{
-		events[baseEvent->GetName()].push_back(func);
+		events[eventName].push_back(func);
 	}
 }
 
-void EventManager::RemoveListener(BaseEvent* baseEvent, void (*func)(BaseEvent*))
+void EventManager::RemoveListener(std::string eventName, void (*func)(BaseEvent*))
 {
-	if (events.find(baseEvent->GetName()) == events.end())
+	if (events.find(eventName) == events.end())
 	{
-		events[baseEvent->GetName()].remove(func);
+		events[eventName].remove(func);
 	}
 }
