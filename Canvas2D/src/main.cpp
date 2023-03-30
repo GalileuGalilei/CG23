@@ -14,8 +14,6 @@
 
 
 
-
-
 //funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
 //globais que podem ser setadas pelo metodo keyboard()
 void render()
@@ -25,11 +23,6 @@ void render()
     circleFill( 160, 160, 30, 5);
 }
 
-//funcao para tratamento de mouse: cliques, movimentos e arrastos
-void mouse(int button, int state, int wheel, int direction, int x, int y)
-{
-
-}
 
 //funcao chamada toda vez que uma tecla for pressionada
 void keyboard(int key)
@@ -44,14 +37,18 @@ void keyboardUp(int key)
    printf("\nLiberou Tecla: %d" , key);
 }
 
-class OnMouseEvent : BaseEvent
+class OnMouseEvent : public BaseEvent
 {
 public:
 
-    static std::string GetName()
+    static EventType GetStaticType()
     {
-        std::string name = "OnMouseEvent";
-        return name;
+        return EventType::MouseEvent;
+    }
+
+    EventType GetType () const override
+    {
+        return OnMouseEvent::GetStaticType();
     }
 
     int button;
@@ -70,16 +67,26 @@ public:
         this->x = x; 
         this->y = y;
     }
+
+
 };
 
-void OnMouseEventListener(OnMouseEvent* args)
+bool OnMouseEventListener(BaseEvent* baseEvent)
 {
-    printf("\nmouse %d %d %d %d %d %d", args->button, args->state, args->wheel, args->direction, args->x, args->y);
+   OnMouseEvent* args = (OnMouseEvent*)(void*)(baseEvent);
+   printf("\nmouse %d %d %d %d %d %d", args->button, args->state, args->wheel, args->direction, args->x, args->y);
+   return true;
+}
+
+//funcao para tratamento de mouse: cliques, movimentos e arrastos
+void mouse(int button, int state, int wheel, int direction, int x, int y)
+{
+    EventManager::Instance()->InvokeEvent<BaseEvent>(new OnMouseEvent(button, state, wheel, direction, x, y));
 }
 
 int main(void)
 {
-    EventManager::Instance()->AddListener<OnMouseEvent>(OnMouseEventListener);
+   EventManager::Instance()->AddListener<OnMouseEvent>(OnMouseEventListener);
    int screenWidth = 500, screenHeight = 500; //largura e altura inicial da tela. Alteram com o redimensionamento de tela.
    init(&screenWidth, &screenHeight, "Canvas 2D");
    run();
