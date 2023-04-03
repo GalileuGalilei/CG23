@@ -6,8 +6,8 @@ EventType BaseEvent::GetStaticType()
 	return EventType::None;
 }
 
-using eventFunc = void(*)(BaseEvent*);
-using eventMap = eventFunc[EventType::Count][LISTENERS_TAM];
+using eventList = std::list<void(*)(BaseEvent*)>;
+using eventMap = eventList[EventType::Count];
 
 eventMap EventManager::events;
 
