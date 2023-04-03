@@ -6,7 +6,7 @@ EventType BaseEvent::GetStaticType()
 	return EventType::None;
 }
 
-using eventFunc = bool(*)(BaseEvent*);
+using eventFunc = void(*)(BaseEvent*);
 using eventMap = eventFunc[EventType::Count][LISTENERS_TAM];
 
 eventMap EventManager::events;

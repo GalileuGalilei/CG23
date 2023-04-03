@@ -11,7 +11,8 @@
 enum EventType
 {
 	None = 0,
-	MouseEvent,
+	ClickEvent,
+	RenderEvent,
 	Count
 };
 
@@ -38,7 +39,7 @@ protected:
 /// </summary>
 class EventManager
 {
-	using eventFunc = bool(*)(BaseEvent*);
+	using eventFunc = void(*)(BaseEvent*);
 	using eventMap = eventFunc[EventType::Count][LISTENERS_TAM];
 
 	//singleton não pode ser copiável ou assinalável
