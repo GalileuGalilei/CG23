@@ -1,11 +1,7 @@
 #ifndef EVENT_MANAGER
 #define EVENT_MANAGER
-#define LISTENERS_TAM 8
 
-#include <map>
 #include <list>
-#include <string>
-#include <functional>
 #include <type_traits>
 
 enum EventType
@@ -15,7 +11,6 @@ enum EventType
 	RenderEvent,
 	Count
 };
-
 
 /// <summary>
 /// classe base para a criação de eventos globais que podem ser usados pelo EventManager
@@ -33,34 +28,28 @@ protected:
 	BaseEvent() {};
 };
 
+using EvenFunc = void(*)(BaseEvent*);
+using EventList = std::list<EvenFunc>;
+using EventMap = EventList[EventType::Count];
 
 /// <summary>
 /// Singleton que controla todos os eventos globais
 /// </summary>
 class EventManager
 {
-	using eventFunc = void(*)(BaseEvent*);
-	using eventMap = eventFunc[EventType::Count][LISTENERS_TAM];
-
-	//singleton não pode ser copiável ou assinalável
 	EventManager(EventManager* other) = delete;
 	void operator=(const EventManager*) = delete;
 	
 private:
 	static EventManager* instance;
-	static eventMap events;
+	static EventMap eventMap;
 	EventManager() 
 	{
-		for (int i = 0; i < EventType::Count; i++)
-		{
-			for (int j = 0; j < LISTENERS_TAM; j++)
-			{
-				EventManager::events[i][j] = NULL;
-			}
-		}
+
 	};
 
 public:
+
 	static EventManager* Instance();
 
 	template <typename T>
@@ -72,30 +61,24 @@ public:
 			return;
 		}
 
-
 		if (T::GetStaticType() != baseEvent->GetType() || T::GetStaticType() == EventType::None)
 		{
-			printf("ERRO: tipo do evento não correspondente\n\n");
+			printf("ERRO: template do evento não corresponde com o tipo do argumento\n\n");
 			return;
 		}
 
 		EventType type = T::GetStaticType();
+		EventList eventList = EventManager::eventMap[type];
 
-		auto functions = EventManager::events[type];
-
-		for (int i = 0; i < LISTENERS_TAM; i++)
+		//printf("tamanho do evento: %i", eventList.size());
+		for (EvenFunc f : eventList)
 		{
-			if (functions[i] == NULL)
-			{
-				return;
-			}
-
-			functions[i](baseEvent);
+			f(baseEvent);
 		}
 	}
 
 	template<typename T>
-	void AddListener(eventFunc func)
+	void AddListener(EvenFunc func)
 	{
 		if (!std::is_base_of<BaseEvent, T>())
 		{
@@ -104,21 +87,12 @@ public:
 		}
 
 		EventType type = T::GetStaticType();
-
-		auto functions = EventManager::events[type];
-
-		for (int i = 0; i < LISTENERS_TAM; i++)
-		{
-			if (functions[i] == NULL)
-			{
-				functions[i] = func;
-				return;
-			}
-		}
+		EventList* eventList = &EventManager::eventMap[type];
+		eventList->push_back(func);
 	}
 
 	template<typename T>
-	void RemoveListener(void (*func)(T*))
+	void RemoveListener(EvenFunc func)
 	{
 		if (!std::is_base_of<BaseEvent, T>())
 		{
@@ -127,21 +101,8 @@ public:
 		}
 
 		EventType type = T::GetStaticType();
-		auto functions = EventManager::events[type];
-
-		for (int i = 0; i < LISTENERS_TAM - 1; i++)
-		{
-			if (functions[i] == func)
-			{
-				functions[i] = functions[i + 1];
-				functions[i] = func;
-			}
-		}
-
-		if (functions[LISTENERS_TAM - 1] == func)
-		{
-			functions[LISTENERS_TAM - 1] = NULL;
-		}
+		EventList* eventList = &EventManager::eventMap[type];
+		eventList->remove(func);
 	}
 };
 

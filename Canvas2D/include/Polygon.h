@@ -2,12 +2,12 @@
 #include "Vector2.h"
 #include "EventManager.h"
 #include "GameEvents.h"
-#include <list>
+#include "gl_canvas2d.h"
 
 /// <summary>
 /// classe que define uma base para polygonos cônvacos
 /// </summary>
-class PolygonShape
+class PolygonShape : IRenderable
 {
 protected:
 	float* points[2]; //points[0] = x; points[1] = y(coordenadas absolutas)
@@ -25,10 +25,8 @@ public:
 	void Fill();
 
 	virtual bool PointToPolygon(Vector2 vector);
-	virtual void Render();
 
-	static std::list<PolygonShape*> polygons;
-	static void RenderPolygonsListener(BaseEvent* baseEvent);
+	friend class DrawableDisplay;
 
 	PolygonShape(float* x, float* y, int tam)
 	{
@@ -39,8 +37,6 @@ public:
 		R = 0;
 		G = 0;
 		B = 0;
-
-		polygons.push_back(this);
 	}
 
 	/// <summary>
@@ -70,12 +66,19 @@ public:
 		R = 0;
 		G = 0;
 		B = 0;
-
-		polygons.push_back(this);
 	}
 
-	~PolygonShape()
+private:
+	void OnRender(OnRenderEvent* args) const override
 	{
-		polygons.remove(this);
+		CV::color(R, G, B);
+		if (isFilled)
+		{
+			CV::polygonFill(points[0], points[1], tam);
+		}
+		else
+		{
+			CV::polygon(points[0], points[1], tam);
+		}
 	}
 };

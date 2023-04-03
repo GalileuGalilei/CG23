@@ -47,9 +47,9 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 
 int main(void)
 {
-    EventManager::Instance()->AddListener<OnRenderEvent>(PolygonShape::RenderPolygonsListener);
-
-   int screenWidth = 500, screenHeight = 500; //largura e altura inicial da tela. Alteram com o redimensionamento de tela.
-   CV::init(&screenWidth, &screenHeight, "Canvas 2D");
-   CV::run();
+    EventManager::Instance()->AddListener<OnRenderEvent>(IRenderable::RenderAll);
+    PolygonShape* rect = new PolygonShape(Vector2(50, 50), Vector2(200, 200));
+    int screenWidth = 500, screenHeight = 500; //largura e altura inicial da tela. Alteram com o redimensionamento de tela.
+    CV::init(&screenWidth, &screenHeight, "Canvas 2D");
+    CV::run();
 }
