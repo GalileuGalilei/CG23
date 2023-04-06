@@ -10,19 +10,23 @@ void PolygonShape::Translate(Vector2 vector)
 	}
 }
 
+void PolygonShape::SetPosition(Vector2 pos)
+{
+	Vector2 t = pos - Vector2(points[0][0], points[1][0]);
+	this->Translate(t);
+}
+
 void PolygonShape::Fill()
 {
 	isFilled = true;
 }
 
-bool PolygonShape::PointToPolygon(Vector2 vector)
+void PolygonShape::SetColor(Color color)
 {
-	return false;
+	this->color = color;
 }
 
-void PolygonShape::SetColor(float R, float G, float B)
+void PolygonShape::SetColor(float r, float g, float b)
 {
-	this->R = R;
-	this->G = G;
-	this->B = B;
+	this->color = Color(r, g, b);
 }

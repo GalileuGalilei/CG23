@@ -1,5 +1,6 @@
 #pragma once
 #include "EventManager.h"
+#include "Vector2.h"
 class OnRenderEvent : BaseEvent
 {
 public:
@@ -21,7 +22,7 @@ public:
 
 private:
 	static std::list<IRenderable*> renderList;
-	virtual void OnRender(OnRenderEvent* args) const = 0;
+	virtual void OnRender(OnRenderEvent* args) = 0;
 
 protected:
 	IRenderable()
@@ -57,14 +58,41 @@ public:
 	}
 };
 
+class OnMouseOverEvent : BaseEvent
+{
+private:
+	static int oldX, oldY;
+
+public:
+	static EventType GetStaticType();
+
+	EventType GetType() const override
+	{
+		return GetStaticType();
+	}
+
+	int x, y;
+	Vector2 translation;
+
+	OnMouseOverEvent(int x, int y)
+	{
+		this->x = x;
+		this->y = y;
+
+		translation = Vector2(x - oldX, y - oldY);
+	}
+};
+
 class IClickable
 {
 private:
-	static void ClickAll(BaseEvent* baseEvent);
+	virtual void OnClick(OnClickEvent* args) = 0;
+	virtual void OnMouseOver(OnMouseOverEvent* args) = 0;
 
 public:
 	static std::list<IClickable*> clickList;
-	virtual void OnClick(OnClickEvent* args) const = 0;
+	static void ClickAll(BaseEvent* baseEvent);
+	static void MouseOverAll(BaseEvent* baseEvent);
 
 protected:
 	IClickable()
@@ -77,4 +105,3 @@ protected:
 		clickList.remove(this);
 	}
 };
-

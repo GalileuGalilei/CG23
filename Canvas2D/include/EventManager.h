@@ -8,6 +8,7 @@ enum EventType
 {
 	None = 0,
 	ClickEvent,
+	MouseOverEvent,
 	RenderEvent,
 	Count
 };

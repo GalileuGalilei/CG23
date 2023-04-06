@@ -10,10 +10,10 @@
 class PolygonShape : IRenderable
 {
 protected:
-	float* points[2]; //points[0] = x; points[1] = y(coordenadas absolutas)
-	float R, G, B;
+	float* points[2]; //points[0] = x; points[1] = y  (coordenadas absolutas)
+	Color color = Colors::black;
 	int tam = 0;
-	bool isFilled = false;
+	bool isFilled = true;
 
 public:
 
@@ -21,10 +21,10 @@ public:
 	/// verifica se um ponto está dentro do polígono
 	/// </summary>
 	void Translate(Vector2 vector);
-	void SetColor(float R, float G, float B);
+	void SetPosition(Vector2 pos);
+	void SetColor(Color color);
+	void SetColor(float r, float g, float b);
 	void Fill();
-
-	virtual bool PointToPolygon(Vector2 vector);
 
 	friend class DrawableDisplay;
 
@@ -33,21 +33,18 @@ public:
 		this->tam = tam;
 		points[0] = x;
 		points[1] = y;
-
-		R = 0;
-		G = 0;
-		B = 0;
 	}
 
 	/// <summary>
 	/// cria um polígono no formato de um retângulo
 	/// </summary>
-	/// <param name="ab">canto inferio esquerdo</param>
-	/// <param name="ba">canto superior direito</param>
-	PolygonShape(Vector2 ab, Vector2 ba)
+	PolygonShape(Vector2 position, Vector2 size)
 	{
 		float* x = new float[4];
 		float* y = new float[4];
+
+		Vector2 ab = position;
+		Vector2 ba = position + size;
 
 		x[0] = ab.x;
 		x[1] = ab.x;
@@ -62,16 +59,12 @@ public:
 		points[0] = x;
 		points[1] = y;
 		tam = 4;
-
-		R = 0;
-		G = 0;
-		B = 0;
 	}
 
 private:
-	void OnRender(OnRenderEvent* args) const override
+	void OnRender(OnRenderEvent* args) override
 	{
-		CV::color(R, G, B);
+		CV::color(color.r, color.g, color.b);
 		if (isFilled)
 		{
 			CV::polygonFill(points[0], points[1], tam);
@@ -80,5 +73,30 @@ private:
 		{
 			CV::polygon(points[0], points[1], tam);
 		}
+	}
+};
+
+class EditablePolygon : PolygonShape
+{
+protected:
+	int* triangules;
+	int tamTriangules;
+
+public:
+
+
+
+
+private:
+	void Triangulate()
+	{
+		std::list<int> triangules;
+
+
+	}
+
+	void OnRender(OnRenderEvent* args) override
+	{
+
 	}
 };

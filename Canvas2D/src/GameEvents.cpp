@@ -1,5 +1,13 @@
 #include "GameEvents.h"
 
+int OnMouseOverEvent::oldX = 0;
+int OnMouseOverEvent::oldY = 0;
+
+EventType OnMouseOverEvent::GetStaticType()
+{
+	return EventType::MouseOverEvent;
+}
+
 EventType OnRenderEvent::GetStaticType()
 {
 	return EventType::RenderEvent;
@@ -29,5 +37,15 @@ void IClickable::ClickAll(BaseEvent* baseEvent)
 	for (auto i : IClickable::clickList)
 	{
 		i->OnClick(args);
+	}
+}
+
+void IClickable::MouseOverAll(BaseEvent* baseEvent)
+{
+	OnMouseOverEvent* args = (OnMouseOverEvent*)baseEvent;
+
+	for (auto i : IClickable::clickList)
+	{
+		i->OnMouseOver(args);
 	}
 }

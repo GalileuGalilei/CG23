@@ -12,6 +12,7 @@
 #include "gl_canvas2d.h"
 #include "EventManager.h"
 #include "GameEvents.h"
+#include "DrawableDisplay.h"
 #include "Polygon.h" //refatorar nome
 
 
@@ -20,7 +21,7 @@
 //globais que podem ser setadas pelo metodo keyboard()
 void render()
 {
-    EventManager::Instance()->InvokeEvent<OnRenderEvent>((BaseEvent*)(new OnRenderEvent()));
+    EventManager::Instance()->InvokeEvent<OnRenderEvent>((BaseEvent*) new OnRenderEvent());
 }
 
 
@@ -41,14 +42,21 @@ void keyboardUp(int key)
 //funcao para tratamento de mouse: cliques, movimentos e arrastos
 void mouse(int button, int state, int wheel, int direction, int x, int y)
 {
-    
-}
+    if (state == 1)
+    {
+        EventManager::Instance()->InvokeEvent<OnClickEvent>((BaseEvent*) new OnClickEvent(button, state, x, y));
+    }
 
+    EventManager::Instance()->InvokeEvent<OnMouseOverEvent>((BaseEvent*) new OnMouseOverEvent(x, y));
+}
 
 int main(void)
 {
     EventManager::Instance()->AddListener<OnRenderEvent>(IRenderable::RenderAll);
-    PolygonShape* rect = new PolygonShape(Vector2(50, 50), Vector2(200, 200));
+    EventManager::Instance()->AddListener<OnClickEvent>(IClickable::ClickAll);
+    EventManager::Instance()->AddListener<OnMouseOverEvent>(IClickable::MouseOverAll);
+    DrawableDisplay display = DrawableDisplay(Vector2(25, 25), Vector2(450, 450));
+
     int screenWidth = 500, screenHeight = 500; //largura e altura inicial da tela. Alteram com o redimensionamento de tela.
     CV::init(&screenWidth, &screenHeight, "Canvas 2D");
     CV::run();

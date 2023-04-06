@@ -18,6 +18,16 @@
 
 int *scrWidth, *scrHeight; //guarda referencia para as variaveis de altura e largura da main()
 
+Color Colors::black = Color(0, 0, 0);
+Color Colors::blue = Color(0.1, 0.1, 0.9);
+Color Colors::green = Color(0.1, 0.9, 0.1);
+Color Colors::red = Color(0.9, 0.1, 0.1);
+Color Colors::orange = Color(0.9, 0.6, 0);
+Color Colors::white = Color(1, 1, 1);
+Color Colors::yellow = Color(0.7, 0.4, 0);
+
+//trecho substituido pelo código acima
+/*
 //conjunto de cores predefinidas. Pode-se adicionar mais cores.
 float Colors[14][3]=
 {
@@ -36,7 +46,7 @@ float Colors[14][3]=
     {0.5, 0, 0.5}, //
     {1, 1, 1}, //white
 };
-
+*/
 void ConvertMouseCoord(int button, int state, int wheel, int direction, int x, int y);
 
 //funcoes de CALLBACK da biblioteca Glut
@@ -195,12 +205,12 @@ void CV::color(float r, float g, float b)
 {
    glColor3d(r, g, b);
 }
-
+/*
 void CV::color(int idx)
 {
     glColor3fv(Colors[idx]);
 }
-
+*/
 void CV::color(float r, float g, float b, float alpha)
 {
    glColor4d(r, g, b, alpha);

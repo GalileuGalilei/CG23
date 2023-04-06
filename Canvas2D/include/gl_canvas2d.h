@@ -16,6 +16,31 @@
 
 #define Y_CANVAS_CRESCE_PARA_CIMA 1
 
+class Color
+{
+public:
+    float r, g, b;
+
+    Color() = default;
+    Color(float r, float g, float b)
+    {
+        this->r = r;
+        this->g = g;
+        this->b = b;
+    }
+};
+
+struct Colors
+{
+    static Color white;
+    static Color black;
+    static Color blue;
+    static Color red;
+    static Color yellow;
+    static Color orange;
+    static Color green;
+};
+
 class CV //classe Canvas2D
 {
 public:

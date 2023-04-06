@@ -4,30 +4,68 @@
 #include "gl_canvas2d.h"
 #include "Polygon.h"
 
-class Botao : PolygonShape
+class Button : IRenderable, IClickable
 {
-  float altura, largura, x, y;
+protected:
+    const float mouseOverColorChange = 0; //o quanto a cor escurece 
+
   char label[100];
-  
+  bool isMouseOver = false;
+  Color color;
+  Vector2 position, size;
+  PolygonShape* polygon;
 
 public:
-  Botao(float _x, float _y, float _larg, float _alt, char *_label) :
-  PolygonShape(Vector2(_x, _y), Vector2(_x + _larg, _y + _alt))
+  Button(Vector2 position, Vector2 size, Color color, char *label)
   {
-     isFilled = true;
-     altura  = _alt;
-     largura = _larg;
-     x = _x;
-     y = _y;
-     strcpy(label, _label);
+     strcpy(this->label, label);
+     this->position = position;
+     this->color = color;
+     this->polygon = new PolygonShape(position, size);
+     this->polygon->SetColor(color);
   }
 
-  void Render() override
+  void OnRender(OnRenderEvent* args) override
   {
-      PolygonShape::Render();
       CV::color(0, 0, 0);
-      CV::text(x+5, y+altura/2, label); //escreve o label do botao mais ou menos ao centro.
+      CV::text(position.x+5, position.y + size.y / 2, label);
   }
+
+  void OnClick(OnClickEvent* args) override
+  {
+	  if (!CheckBounds(args->x, args->y))
+	  {
+		  return;
+	  }
+
+	  //polygon->SetColor(color.r * mouseOverColorChange, color.g * mouseOverColorChange, color.b * mouseOverColorChange);
+	  printf("botao!\n");
+  }
+
+  void OnMouseOver(OnMouseOverEvent* args) override
+  {
+	  if (!CheckBounds(args->x, args->y))
+	  {
+		  return;
+	  }
+  }
+
+private:
+	bool CheckBounds(int x, int y)
+	{
+		if (x > position.x + size.x || x < position.x)
+		{
+			return false;
+		}
+
+		if (y > position.y + size.y || y < position.y)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
 };
 
 #endif
