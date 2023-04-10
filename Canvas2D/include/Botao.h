@@ -3,26 +3,31 @@
 
 #include "gl_canvas2d.h"
 #include "Polygon.h"
-
 class Button : IRenderable, IClickable
 {
+private:
+	void(*callback)();
+
 protected:
     const float mouseOverColorChange = 0; //o quanto a cor escurece 
 
-  char label[100];
-  bool isMouseOver = false;
-  Color color;
-  Vector2 position, size;
-  PolygonShape* polygon;
+	char label[100];
+	bool isMouseOver = false;
+	Color color;
+	Vector2 position, size;
+	PolygonShape* polygon;
 
 public:
-  Button(Vector2 position, Vector2 size, Color color, char *label)
+  Button(Vector2 position, Vector2 size, Color color, const char label[], void(*callback)())
   {
-     strcpy(this->label, label);
+     strcpy_s(this->label, 100, label);
+
      this->position = position;
+	 this->size = size;
      this->color = color;
      this->polygon = new PolygonShape(position, size);
      this->polygon->SetColor(color);
+	 this->callback = callback;
   }
 
   void OnRender(OnRenderEvent* args) override
@@ -40,6 +45,7 @@ public:
 
 	  //polygon->SetColor(color.r * mouseOverColorChange, color.g * mouseOverColorChange, color.b * mouseOverColorChange);
 	  printf("botao!\n");
+	  callback();
   }
 
   void OnMouseOver(OnMouseOverEvent* args) override

@@ -1,6 +1,5 @@
 #ifndef __CANVAS_2D__H__
 #define __CANVAS_2D__H__
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

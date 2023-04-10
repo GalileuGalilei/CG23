@@ -2,17 +2,21 @@
 #include "Vector2.h"
 #include "Polygon.h"
 #include "gl_canvas2d.h"
+#include "Botao.h"
+#include "ToolBar.h"
 #include "GameEvents.h"
 
-class DrawableDisplay : IClickable, IRenderable
+/// <summary>
+/// Essa classe contém todas as funções e instâncias de calsses necessárias para criar
+/// </summary>
+class DrawableDisplay : IClickable
 {
 private:
 	Vector2 position;
 	Vector2 size;
 	PolygonShape* editablePolygon;
 
-	//atv pratica:
-	bool moveCircle = false;
+	bool IsInsertPolygonEnable = false;
 
 public:
 
@@ -25,15 +29,9 @@ public:
 		editablePolygon = new PolygonShape(NULL, NULL, 0);
 	}
 
-	void OnRender(OnRenderEvent* args) override
-	{
-		CV::color(0.5, 0.5, 0.5);
-		CV::rectFill(position, size);
-	}
-
 	void OnClick(OnClickEvent* args) override
 	{
-		if (!CheckBounds(args->x, args->y))
+		if (!CheckBounds(args->x, args->y) || !IsInsertPolygonEnable)
 		{
 			return;
 		}
@@ -43,7 +41,7 @@ public:
 
 	void OnMouseOver(OnMouseOverEvent* args) override
 	{
-		if (editablePolygon->tam < 1)
+		if (editablePolygon->tam < 1 || !IsInsertPolygonEnable)
 		{
 			return;
 		}
@@ -53,6 +51,7 @@ public:
 	}
 
 private:
+
 	bool CheckBounds(int x, int y)
 	{
 		if (x > position.x + size.x || x < position.x)

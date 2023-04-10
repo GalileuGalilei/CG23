@@ -91,7 +91,7 @@ private:
 	void Triangulate()
 	{
 		std::list<int> triangules;
-
+		
 
 	}
 

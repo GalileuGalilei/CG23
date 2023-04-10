@@ -3,7 +3,6 @@
 // Autor: Cesar Tadeu Pozzer
 //        04/2021
 // *********************************************************************/
-
 #include <GL/glut.h>
 #include <GL/freeglut_ext.h>
 #include <math.h>
@@ -52,12 +51,14 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 
 int main(void)
 {
+    int screenWidth = 500, screenHeight = 500; //largura e altura inicial da tela. Alteram com o redimensionamento de tela.
+
     EventManager::Instance()->AddListener<OnRenderEvent>(IRenderable::RenderAll);
     EventManager::Instance()->AddListener<OnClickEvent>(IClickable::ClickAll);
     EventManager::Instance()->AddListener<OnMouseOverEvent>(IClickable::MouseOverAll);
     DrawableDisplay display = DrawableDisplay(Vector2(25, 25), Vector2(450, 450));
+    ToolBar toolBar = ToolBar(Vector2(0, 0), Vector2(40, screenHeight), 5);
 
-    int screenWidth = 500, screenHeight = 500; //largura e altura inicial da tela. Alteram com o redimensionamento de tela.
     CV::init(&screenWidth, &screenHeight, "Canvas 2D");
     CV::run();
 }
