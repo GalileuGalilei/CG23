@@ -3,6 +3,7 @@
 #include "EventManager.h"
 #include "GameEvents.h"
 #include "gl_canvas2d.h"
+#include <vector>
 
 /// <summary>
 /// classe que define uma base para polygonos cônvacos
@@ -10,7 +11,7 @@
 class PolygonShape : IRenderable
 {
 protected:
-	float* points[2]; //points[0] = x; points[1] = y  (coordenadas absolutas)
+	std::vector<float> points[2]; // [0] = x; [1] = y;
 	Color color = Colors::black;
 	int tam = 0;
 	bool isFilled = true;
@@ -28,50 +29,38 @@ public:
 
 	friend class DrawableDisplay;
 
-	PolygonShape(float* x, float* y, int tam)
-	{
-		this->tam = tam;
-		points[0] = x;
-		points[1] = y;
-	}
+	PolygonShape(std::vector<Vector2> points);
 
 	/// <summary>
 	/// cria um polígono no formato de um retângulo
 	/// </summary>
-	PolygonShape(Vector2 position, Vector2 size)
-	{
-		float* x = new float[4];
-		float* y = new float[4];
+	PolygonShape(Vector2 position, Vector2 size);
 
-		Vector2 ab = position;
-		Vector2 ba = position + size;
-
-		x[0] = ab.x;
-		x[1] = ab.x;
-		x[2] = ba.x;
-		x[3] = ba.x;
-
-		y[0] = ab.y;
-		y[1] = ba.y;
-		y[2] = ba.y;
-		y[3] = ab.y;
-
-		points[0] = x;
-		points[1] = y;
-		tam = 4;
-	}
+	/// <summary>
+	/// verifica se um ponto está dentro do polígono
+	/// </summary>
+	bool PointToPolygon(Vector2 point);
 
 private:
+
+	//verifica se um ponto está dentro de um retângulo delimitado por dois pontos(um segmento)
+	bool OnLine(Vector2 p1, Vector2 p2, Vector2 p3);
+	int Orientation(Vector2 p1, Vector2 p2, Vector2 p3);
+	bool IsLineIntersecting(Vector2 p1, Vector2 q1, Vector2 p2, Vector2 q2);
+
 	void OnRender(OnRenderEvent* args) override
 	{
+		float* x = points[0].data();
+		float* y = points[1].data();
+
 		CV::color(color.r, color.g, color.b);
 		if (isFilled)
 		{
-			CV::polygonFill(points[0], points[1], tam);
+			CV::polygonFill(x, y, tam);
 		}
 		else
 		{
-			CV::polygon(points[0], points[1], tam);
+			CV::polygon(x, y, tam);
 		}
 	}
 };
@@ -90,9 +79,30 @@ public:
 private:
 	void Triangulate()
 	{
-		std::list<int> triangules;
-		
+		if (tam < 3)
+		{
+			return;
+		}
 
+		std::vector<int> triangules;
+		std::vector<float> aux[2];
+
+		for (int i = 0; i < tam; i++)
+		{
+			aux[0].push_back(points[0][i]);
+			aux[1].push_back(points[1][i]);
+		}
+
+		int j = 0;
+		while (tam > 3)
+		{
+			//remove o ponto na posição j do poligono
+			int auxX = points[0][j];
+			int auxY = points[1][j];
+
+			tam = points->size();
+			j = (j + 1) % tam;
+		}
 	}
 
 	void OnRender(OnRenderEvent* args) override
