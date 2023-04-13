@@ -14,9 +14,9 @@ class DrawableDisplay : IClickable
 private:
 	Vector2 position;
 	Vector2 size;
-	PolygonShape* editablePolygon;
+	EditablePolygon* editablePolygon;
 
-	bool IsInsertPolygonEnable = false;
+	bool IsInsertPolygonEnable = true;
 
 public:
 
@@ -26,7 +26,7 @@ public:
 	{
 		this->position = position;
 		this->size = size;
-		editablePolygon = new PolygonShape(NULL, NULL, 0);
+		editablePolygon = new EditablePolygon(std::vector<Vector2>());
 	}
 
 	void OnClick(OnClickEvent* args) override
@@ -70,50 +70,24 @@ private:
 	void AddPoint(OnClickEvent* args)
 	{
 		if (args->button == 0)
-		{
-			int newTam;
-			if (editablePolygon->tam == 0)
-			{
-				newTam = 2;
-			}
-			else
-			{
-				newTam = editablePolygon->tam + 1;
-			}
+		{	
+			editablePolygon->points[0].push_back(args->x);
+			editablePolygon->points[1].push_back(args->y);
+			editablePolygon->tam++;
 
-
-			float* x = (float*)malloc(sizeof(float) * newTam);
-			float* y = (float*)malloc(sizeof(float) * newTam);
-
-			
-			for (int i = 0; i < editablePolygon->tam; i++)
+			if (editablePolygon->tam > 4)
 			{
-				x[i] = editablePolygon->points[0][i];
-				y[i] = editablePolygon->points[1][i];
+				editablePolygon->Triangulate();
 			}
 
-			x[newTam - 1] = args->x;
-			y[newTam - 1] = args->y;
-
-			if (editablePolygon->tam > 0)
+			if (editablePolygon->tam == 1)
 			{
-				free(editablePolygon->points[0]);
-				free(editablePolygon->points[1]);
+				AddPoint(args);
 			}
-
-			if (editablePolygon->tam == 0)
-			{
-				x[newTam - 2] = args->x;
-				y[newTam - 2] = args->y;
-			}
-
-			editablePolygon->points[0] = x;
-			editablePolygon->points[1] = y;
-			editablePolygon->tam = newTam;
 		}
 		else
 		{
-			editablePolygon = new PolygonShape(NULL, NULL, 0);
+			editablePolygon = new EditablePolygon(std::vector<Vector2>());
 		}
 	}
 };

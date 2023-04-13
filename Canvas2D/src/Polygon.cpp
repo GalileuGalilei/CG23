@@ -106,7 +106,7 @@ bool PolygonShape::IsLineIntersecting(Vector2 p1, Vector2 q1, Vector2 p2, Vector
 	return false;
 }
 
-bool PolygonShape::PointToPolygon(Vector2 point)
+bool PolygonShape::PointToPolygon(Vector2 point, std::list<int>* ignoreIndex)
 {
 	if (tam < 3)
 	{
@@ -115,9 +115,31 @@ bool PolygonShape::PointToPolygon(Vector2 point)
 
 	Vector2 horizontal = Vector2(100000, point.y); //linha que vai de um ponto muito distante no eixo x até o ponto
 	int count = 0, i = 0;
-	do
+	while(true)
 	{
+		if (i == tam - 1)
+		{
+			break;
+		}
+
 		int next = (i + 1) % tam;
+		if (ignoreIndex != NULL)
+		{
+			for (int index : *ignoreIndex)
+			{
+				if (i == index)
+				{
+					i++;
+					continue;
+				}
+
+				if (next == index)
+				{
+					next = (next + 1) % tam;
+				}
+			}
+		}
+
 		Vector2 p1 = Vector2(points[0][i], points[1][i]);
 		Vector2 p2 = Vector2(points[0][next], points[1][next]);
 
@@ -129,7 +151,8 @@ bool PolygonShape::PointToPolygon(Vector2 point)
 			}
 			count++;
 		}
+
 		i = next;
-	} while (i != 0);
+	} 
 	return count % 2 == 1;
 }

@@ -39,7 +39,7 @@ public:
 	/// <summary>
 	/// verifica se um ponto está dentro do polígono
 	/// </summary>
-	bool PointToPolygon(Vector2 point);
+	bool PointToPolygon(Vector2 point, std::list<int>* ignoreIndex);
 
 private:
 
@@ -65,18 +65,18 @@ private:
 	}
 };
 
-class EditablePolygon : PolygonShape
+class EditablePolygon : public PolygonShape
 {
 protected:
-	int* triangules;
-	int tamTriangules;
+	std::vector<int> triangles;
 
 public:
 
+	EditablePolygon(std::vector<Vector2> points) : PolygonShape(points)
+	{
 
+	}
 
-
-private:
 	void Triangulate()
 	{
 		if (tam < 3)
@@ -84,29 +84,71 @@ private:
 			return;
 		}
 
-		std::vector<int> triangules;
-		std::vector<float> aux[2];
-
-		for (int i = 0; i < tam; i++)
-		{
-			aux[0].push_back(points[0][i]);
-			aux[1].push_back(points[1][i]);
-		}
-
 		int j = 0;
-		while (tam > 3)
+		std::list<int> ignoreIndex;
+		while (ignoreIndex.size() < tam - 3)
 		{
-			//remove o ponto na posição j do poligono
-			int auxX = points[0][j];
-			int auxY = points[1][j];
+			ignoreIndex.push_back(j);
 
-			tam = points->size();
+			if (!PointToPolygon(Vector2(points[0][j], points[1][j]), &ignoreIndex))
+			{
+				triangles.push_back(j);
+				triangles.push_back((j + 1) % tam);
+				triangles.push_back((j + 2) % tam);
+			}
+			else
+			{
+				ignoreIndex.pop_back();
+			}
+
 			j = (j + 1) % tam;
 		}
-	}
+		return;
+		printf("\nfim de loop");
+		for (int i = 0; i < tam; i++)
+		{
+			bool ignore = false;
+			for (int index : ignoreIndex)
+			{
+				if (index == i)
+				{
+					ignore = true;
+					break;
+				}
+			}
 
+			if (!ignore)
+			{
+				triangles.push_back(i);
+			}
+		}
+	}
+private:
 	void OnRender(OnRenderEvent* args) override
 	{
+		float* x = points[0].data();
+		float* y = points[1].data();
 
+		if (tam < 4)
+		{
+			CV::polygon(x, y, tam);
+			return;
+		}
+
+		int triangulesTam = triangles.size();
+		float triangle[2][3];
+
+		for (int i = 0; i < triangulesTam; i += 3)
+		{
+			triangle[0][0] = points[0][triangles[i]];
+			triangle[0][1] = points[0][triangles[i + 1]];
+			triangle[0][2] = points[0][triangles[i + 2]];
+
+			triangle[1][0] = points[1][triangles[i]];
+			triangle[1][1] = points[1][triangles[i + 1]];
+			triangle[1][2] = points[1][triangles[i + 2]];
+
+			CV::polygon(triangle[0], triangle[1], 3);
+		}
 	}
 };
