@@ -106,7 +106,7 @@ bool PolygonShape::IsLineIntersecting(Vector2 p1, Vector2 q1, Vector2 p2, Vector
 	return false;
 }
 
-bool PolygonShape::PointToPolygon(Vector2 point, std::list<int>* ignoreIndex)
+bool PolygonShape::PointToPolygon(Vector2 point, std::vector<bool>* ignoreIndex)
 {
 	if (tam < 3)
 	{
@@ -123,20 +123,18 @@ bool PolygonShape::PointToPolygon(Vector2 point, std::list<int>* ignoreIndex)
 		}
 
 		int next = (i + 1) % tam;
+
 		if (ignoreIndex != NULL)
 		{
-			for (int index : *ignoreIndex)
+			if ((*ignoreIndex)[i])
 			{
-				if (i == index)
-				{
-					i++;
-					continue;
-				}
+				i++;
+				continue;
+			}
 
-				if (next == index)
-				{
-					next = (next + 1) % tam;
-				}
+			while ((*ignoreIndex)[next])
+			{
+				next = (next + 1) % tam;
 			}
 		}
 

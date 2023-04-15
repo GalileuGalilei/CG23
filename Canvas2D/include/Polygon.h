@@ -39,14 +39,14 @@ public:
 	/// <summary>
 	/// verifica se um ponto está dentro do polígono
 	/// </summary>
-	bool PointToPolygon(Vector2 point, std::list<int>* ignoreIndex);
+	bool PointToPolygon(Vector2 point, std::vector<bool>* ignoreIndex);
+	bool IsLineIntersecting(Vector2 p1, Vector2 q1, Vector2 p2, Vector2 q2);
 
 private:
 
 	//verifica se um ponto está dentro de um retângulo delimitado por dois pontos(um segmento)
 	bool OnLine(Vector2 p1, Vector2 p2, Vector2 p3);
 	int Orientation(Vector2 p1, Vector2 p2, Vector2 p3);
-	bool IsLineIntersecting(Vector2 p1, Vector2 q1, Vector2 p2, Vector2 q2);
 
 	void OnRender(OnRenderEvent* args) override
 	{
@@ -85,45 +85,87 @@ public:
 		}
 
 		int j = 0;
-		std::list<int> ignoreIndex;
-		while (ignoreIndex.size() < tam - 3)
-		{
-			ignoreIndex.push_back(j);
+		int valiblePoints = tam;
+		std::vector<bool> ignoreIndex;
 
-			if (!PointToPolygon(Vector2(points[0][j], points[1][j]), &ignoreIndex))
-			{
-				triangles.push_back(j);
-				triangles.push_back((j + 1) % tam);
-				triangles.push_back((j + 2) % tam);
-			}
-			else
-			{
-				ignoreIndex.pop_back();
-			}
+		triangles.clear();
 
-			j = (j + 1) % tam;
-		}
-		return;
-		printf("\nfim de loop");
 		for (int i = 0; i < tam; i++)
 		{
-			bool ignore = false;
-			for (int index : ignoreIndex)
+			ignoreIndex.push_back(false);
+		}
+
+		while (valiblePoints > 3)
+		{
+			if (ignoreIndex[j])
 			{
-				if (index == i)
+				j = (j + 1) % tam;
+				continue;
+			}
+
+			int p1;
+			int p2;
+			ignoreIndex[j] = true;
+
+			for (int i = j - 1; true; i--)
+			{
+				if (i < 0)
 				{
-					ignore = true;
+					i = tam - 1;
+				}
+
+				if (!ignoreIndex[i])
+				{
+					p1 = i;
 					break;
 				}
 			}
 
-			if (!ignore)
+			for (int i = (j + 1) % tam; true; i = (i + 1) % tam)
+			{
+				if (!ignoreIndex[i])
+				{
+					p2 = i;
+					break;
+				}
+			}
+
+			
+			if (IsLineIntersecting(Vector2())
+			{
+				valiblePoints--;
+
+				
+				triangles.push_back(j);
+
+
+			}
+			else
+			{
+				ignoreIndex[j] = false;
+			}
+
+			j = (j + 1) % tam;
+		}
+		if (tam > 8)
+		{
+			return;
+		}
+		for (int i = 0; i < tam; i++)
+		{
+			if (!ignoreIndex[i])
 			{
 				triangles.push_back(i);
 			}
 		}
 	}
 private:
+
+	bool LineToPolygon()
+	{
+
+	}
+
 	void OnRender(OnRenderEvent* args) override
 	{
 		float* x = points[0].data();
