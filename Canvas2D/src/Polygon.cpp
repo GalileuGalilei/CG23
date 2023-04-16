@@ -1,6 +1,55 @@
 #include "Polygon.h"
 #include "gl_canvas2d.h"
 
+//funções auxiliares
+bool OnLine(Vector2 p1, Vector2 p2, Vector2 p3)
+{
+	if
+		(
+			p2.x <= std::max(p1.x, p3.x) &&
+			p2.x >= std::min(p1.x, p3.x) &&
+			p2.y <= std::max(p1.y, p3.y) &&
+			p2.y >= std::min(p1.y, p3.y)
+			)
+	{
+		return true;
+	}
+	return false;
+}
+
+int Orientation(Vector2 p1, Vector2 p2, Vector2 p3)
+{
+	int val = (p2.y - p1.y) * (p3.x - p2.x) - (p2.x - p1.x) * (p3.y - p2.y);
+	if (val == 0)
+	{
+		return 0;  // colinear
+	}
+
+	return (val > 0) ? 1 : -1; // sentido horário ou anti-horário
+}
+
+bool IsLineIntersecting(Vector2 p1, Vector2 q1, Vector2 p2, Vector2 q2)
+{
+	int o1 = Orientation(p1, q1, p2);
+	int o2 = Orientation(p1, q1, q2);
+	int o3 = Orientation(p2, q2, p1);
+	int o4 = Orientation(p2, q2, q1);
+
+	if (o1 != o2 && o3 != o4)
+	{
+		return true;
+	}
+
+	if (o1 == 0 && OnLine(p1, p2, q1)) return true;
+	if (o2 == 0 && OnLine(p1, q2, q1)) return true;
+	if (o3 == 0 && OnLine(p2, p1, q2)) return true;
+	if (o4 == 0 && OnLine(p2, q1, q2)) return true;
+
+	return false;
+}
+
+//funções da classe
+
 PolygonShape::PolygonShape(std::vector<Vector2> points)
 {
 	tam = points.size();
@@ -60,50 +109,44 @@ void PolygonShape::SetColor(float r, float g, float b)
 	this->color = Color(r, g, b);
 }
 
-bool PolygonShape::OnLine(Vector2 p1, Vector2 p2, Vector2 p3)
+int PolygonShape::LineIntersectingCount(Vector2 p1, Vector2 q1, std::vector<bool>* ignoreIndex)
 {
-	if
-		(
-		p2.x <= std::max(p1.x, p3.x) &&
-		p2.x >= std::min(p1.x, p3.x) &&
-		p2.y <= std::max(p1.y, p3.y) &&
-		p2.y >= std::min(p1.y, p3.y)
-		)
+	if (tam < 2)
 	{
-		return true;
-	}
-	return false;
-}
-
-int PolygonShape::Orientation(Vector2 p1, Vector2 p2, Vector2 p3)
-{
-	int val = (p2.y - p1.y) * (p3.x - p2.x) - (p2.x - p1.x) * (p3.y - p2.y);
-	if (val == 0)
-	{
-		return 0;  // colinear
+		return 0;
 	}
 
-	return (val > 0) ? 1 : -1; // sentido horário ou anti-horário
-}
+	int count = 0, i = 0;
 
-bool PolygonShape::IsLineIntersecting(Vector2 p1, Vector2 q1, Vector2 p2, Vector2 q2)
-{
-	int o1 = Orientation(p1, q1, p2);
-	int o2 = Orientation(p1, q1, q2);
-	int o3 = Orientation(p2, q2, p1);
-	int o4 = Orientation(p2, q2, q1);
-
-	if (o1 != o2 && o3 != o4)
+	do
 	{
-		return true;
+		int next = (i + 1) % tam;
+		if (ignoreIndex != NULL)
+		{
+			if ((*ignoreIndex)[i])
+			{
+				i++;
+				continue;
+			}
+			while ((*ignoreIndex)[next])
+			{
+				next = (next + 1) % tam;
+			}
+		}
+		Vector2 p2 = Vector2(points[0][i], points[1][i]);
+		Vector2 q2 = Vector2(points[0][next], points[1][next]);
+		if (IsLineIntersecting(p1, q1, p2, q2))
+		{
+			count++;
+		}
+		if (i > next)
+		{
+			break;
+		}
+		i = next;
 	}
-
-	if (o1 == 0 && OnLine(p1, p2, q1)) return true;
-	if (o2 == 0 && OnLine(p1, q2, q1)) return true;
-	if (o3 == 0 && OnLine(p2, p1, q2)) return true;
-	if (o4 == 0 && OnLine(p2, q1, q2)) return true;
-
-	return false;
+	while (i != 0);
+	return count;
 }
 
 bool PolygonShape::PointToPolygon(Vector2 point, std::vector<bool>* ignoreIndex)
@@ -114,14 +157,22 @@ bool PolygonShape::PointToPolygon(Vector2 point, std::vector<bool>* ignoreIndex)
 	}
 
 	Vector2 horizontal = Vector2(100000, point.y); //linha que vai de um ponto muito distante no eixo x até o ponto
-	int count = 0, i = 0;
-	while(true)
-	{
-		if (i == tam - 1)
-		{
-			break;
-		}
+	int count = LineIntersectingCount(point, horizontal, ignoreIndex);
 
+	return count % 2 == 1;
+}
+
+bool PolygonShape::LineToPolygon(Vector2 p1, Vector2 p2, std::vector<bool>* ignoreIndex)
+{
+	if (tam < 3)
+	{
+		return false;
+	}
+
+	int i = 0;
+
+	do
+	{
 		int next = (i + 1) % tam;
 
 		if (ignoreIndex != NULL)
@@ -131,26 +182,32 @@ bool PolygonShape::PointToPolygon(Vector2 point, std::vector<bool>* ignoreIndex)
 				i++;
 				continue;
 			}
-
 			while ((*ignoreIndex)[next])
 			{
 				next = (next + 1) % tam;
 			}
 		}
+		
+		Vector2 q1 = Vector2(points[0][i], points[1][i]);
+		Vector2 q2 = Vector2(points[0][next], points[1][next]);
 
-		Vector2 p1 = Vector2(points[0][i], points[1][i]);
-		Vector2 p2 = Vector2(points[0][next], points[1][next]);
-
-		if (IsLineIntersecting(p1, p2, point, horizontal))
+		if (IsLineIntersecting(p1, p2, q1, q2))
 		{
-			if (Orientation(p1, point, p2) == 0)
+			if (Orientation(p1, p2, q1) == 0 && Orientation(p1, p2, q2) == 0)
 			{
-				return OnLine(p1, point, p2);
+				return true;
 			}
-			count++;
+
+			return false;
+		}
+
+		if (i > next)
+		{
+			break;
 		}
 
 		i = next;
-	} 
-	return count % 2 == 1;
+	} while (i != 0);
+
+	return PointToPolygon(p1, ignoreIndex) && PointToPolygon(p2, ignoreIndex);
 }

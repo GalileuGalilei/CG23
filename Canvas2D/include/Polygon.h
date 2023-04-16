@@ -18,9 +18,6 @@ protected:
 
 public:
 
-	/// <summary>
-	/// verifica se um ponto está dentro do polígono
-	/// </summary>
 	void Translate(Vector2 vector);
 	void SetPosition(Vector2 pos);
 	void SetColor(Color color);
@@ -37,16 +34,21 @@ public:
 	PolygonShape(Vector2 position, Vector2 size);
 
 	/// <summary>
+	/// verifica se uma linha está dentro do polígono
+	/// </summary>
+	bool LineToPolygon(Vector2 p1, Vector2 p2, std::vector<bool>* ignoreIndex);
+
+	/// <summary>
+	/// conta o número de interseções entre uma linha e o polígono
+	/// </summary>
+	int LineIntersectingCount(Vector2 p1, Vector2 q1, std::vector<bool>* ignoreIndex);
+
+	/// <summary>
 	/// verifica se um ponto está dentro do polígono
 	/// </summary>
 	bool PointToPolygon(Vector2 point, std::vector<bool>* ignoreIndex);
-	bool IsLineIntersecting(Vector2 p1, Vector2 q1, Vector2 p2, Vector2 q2);
 
 private:
-
-	//verifica se um ponto está dentro de um retângulo delimitado por dois pontos(um segmento)
-	bool OnLine(Vector2 p1, Vector2 p2, Vector2 p3);
-	int Orientation(Vector2 p1, Vector2 p2, Vector2 p3);
 
 	void OnRender(OnRenderEvent* args) override
 	{
@@ -72,9 +74,12 @@ protected:
 
 public:
 
-	EditablePolygon(std::vector<Vector2> points) : PolygonShape(points)
-	{
+	EditablePolygon(std::vector<Vector2> points) : PolygonShape(points) {}
 
+	//verifica se o novo ponto é valido(se não criaria um poligono auto intersectante)
+	bool IsNewPointValiable(Vector2 newPoint)
+	{
+		return true;
 	}
 
 	void Triangulate()
@@ -84,73 +89,52 @@ public:
 			return;
 		}
 
-		int j = 0;
 		int valiblePoints = tam;
-		std::vector<bool> ignoreIndex;
-
 		triangles.clear();
 
+		std::vector<bool> ignoreIndex;
 		for (int i = 0; i < tam; i++)
 		{
 			ignoreIndex.push_back(false);
 		}
 
+		int i2 = 0;
+
 		while (valiblePoints > 3)
 		{
-			if (ignoreIndex[j])
+			if (ignoreIndex[i2])
 			{
-				j = (j + 1) % tam;
+				i2 = (i2 + 1) % tam;
 				continue;
 			}
 
-			int p1;
-			int p2;
-			ignoreIndex[j] = true;
+			int i1 = 0;
+			int i3 = 0;
 
-			for (int i = j - 1; true; i--)
-			{
-				if (i < 0)
-				{
-					i = tam - 1;
-				}
+			FindValibleTriangle(&i1, &i3, i2, ignoreIndex);
 
-				if (!ignoreIndex[i])
-				{
-					p1 = i;
-					break;
-				}
-			}
+			Vector2 p1 = Vector2(points[0][i1], points[1][i1]);
+			Vector2 p2 = Vector2(points[0][i3], points[1][i3]);
+			Vector2 dir = p1 - p2;
 
-			for (int i = (j + 1) % tam; true; i = (i + 1) % tam)
-			{
-				if (!ignoreIndex[i])
-				{
-					p2 = i;
-					break;
-				}
-			}
+			dir.normalize();
+			p1 = p1 - dir;
+			p2 = p2 + dir;
 
-			
-			if (IsLineIntersecting(Vector2())
+			if (LineToPolygon(p1, p2, &ignoreIndex)) //significa que a linha está totalmente dentro do polígono
 			{
 				valiblePoints--;
 
-				
-				triangles.push_back(j);
+				triangles.push_back(i1);
+				triangles.push_back(i2);
+				triangles.push_back(i3);
 
-
-			}
-			else
-			{
-				ignoreIndex[j] = false;
+				ignoreIndex[i2] = true;
 			}
 
-			j = (j + 1) % tam;
+			i2 = (i2 + 1) % tam;
 		}
-		if (tam > 8)
-		{
-			return;
-		}
+
 		for (int i = 0; i < tam; i++)
 		{
 			if (!ignoreIndex[i])
@@ -161,9 +145,44 @@ public:
 	}
 private:
 
-	bool LineToPolygon()
+	//acha dois vertices disponíveis que possam formar um triangulo com i2
+	void FindValibleTriangle(int* i1, int* i3, int i2, std::vector<bool> ignoreIndex)
 	{
+		*i3 = i2;
+		*i1 = i2;
 
+		while (true)
+		{
+			if (ignoreIndex[*i3] || *i3 == i2)
+			{
+				*i3 = (*i3 + 1) % tam;
+				continue;
+			}
+
+			if (ignoreIndex[*i1] || *i1 == i2)
+			{
+				(*i1)--;
+
+				if (*i1 < 0)
+				{
+					*i1 = tam - 1;
+				}
+
+				continue;
+			}
+
+			if (*i1 == *i3)
+			{
+				printf("ERRO: não há vertices disponíveis o suficiente para criar um triângulo");
+
+				*i3 = 0;
+				*i1 = 0;
+
+				return;
+			}
+
+			return;
+		}
 	}
 
 	void OnRender(OnRenderEvent* args) override
@@ -194,3 +213,4 @@ private:
 		}
 	}
 };
+

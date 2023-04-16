@@ -52,6 +52,12 @@ public:
        return( aux );
    }
 
+   Vector2 operator * (const int s)
+   {
+       Vector2 aux(x * s, y * s);
+       return(aux);
+   }
+
    //Adicionem os demais overloads de operadores aqui.
 
 
