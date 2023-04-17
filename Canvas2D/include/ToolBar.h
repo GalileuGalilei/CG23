@@ -33,9 +33,20 @@ private:
 
 	void SetToolButtons()
 	{
-		AddButton([]() {printf("lambda callback 1"); }, Colors::green);
-		AddButton([]() {printf("lambda callback 2"); }, Colors::red);
-		AddButton([]() {printf("lambda callback 3"); }, Colors::orange);
+		AddButton([]() 
+			{
+				EventManager::Instance()->RemoveAllListeners<OnToolEvent>();
+			}, Colors::green);
+
+		AddButton([]() 
+			{
+				EventManager::Instance()->RemoveAllListeners<OnToolEvent>();
+			}, Colors::red);
+
+		AddButton([]() 
+			{
+				EventManager::Instance()->RemoveAllListeners<OnToolEvent>();
+			}, Colors::orange);
 	}
 
 	void AddButton(void(*callback)(), Color color)

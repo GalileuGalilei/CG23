@@ -2,7 +2,7 @@
 #define __BOTAO_H__
 
 #include "gl_canvas2d.h"
-#include "Polygon.h"
+#include "PolygonShape.h"
 class Button : IRenderable, IClickable
 {
 private:

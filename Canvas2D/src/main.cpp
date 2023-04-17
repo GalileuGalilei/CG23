@@ -12,7 +12,7 @@
 #include "EventManager.h"
 #include "GameEvents.h"
 #include "DrawableDisplay.h"
-#include "Polygon.h" //refatorar nome
+#include "PolygonShape.h" //refatorar nome
 
 
 

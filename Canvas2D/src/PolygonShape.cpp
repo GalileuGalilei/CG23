@@ -1,4 +1,4 @@
-#include "Polygon.h"
+#include "PolygonShape.h"
 #include "gl_canvas2d.h"
 
 //funções auxiliares

@@ -1,13 +1,13 @@
 #pragma once
 #include "Vector2.h"
-#include "Polygon.h"
+#include "EditablePolygon.h"
 #include "gl_canvas2d.h"
 #include "Botao.h"
 #include "ToolBar.h"
 #include "GameEvents.h"
 
 /// <summary>
-/// Essa classe contém todas as funções e instâncias de calsses necessárias para criar
+/// Essa classe contém todas as funções e instâncias de calsses necessárias para criar e editar um polígono
 /// </summary>
 class DrawableDisplay : IClickable
 {
@@ -20,13 +20,11 @@ private:
 
 public:
 
-	/// <param name="position">posição do canto inferior esquerdo </param>
-	/// <param name="size">dimenções de largura e altura do display </param>
 	DrawableDisplay(Vector2 position, Vector2 size)
 	{
 		this->position = position;
 		this->size = size;
-		editablePolygon = new EditablePolygon(std::vector<Vector2>());
+		editablePolygon = new EditablePolygon();
 	}
 
 	void OnClick(OnClickEvent* args) override
@@ -46,8 +44,7 @@ public:
 			return;
 		}
 
-		editablePolygon->points[0][editablePolygon->tam - 1] = args->x;
-		editablePolygon->points[1][editablePolygon->tam - 1] = args->y;
+		editablePolygon->SetPointPosition(Vector2(args->x, args->y), editablePolygon->tam - 1);
 	}
 
 private:
@@ -71,23 +68,20 @@ private:
 	{
 		if (args->button == 0)
 		{	
+			if (editablePolygon->tam > 2)
+			{
+				editablePolygon->RemoveLastPoint();
+			}
+
+			editablePolygon->AddPoint(Vector2(args->x, args->y));
 			editablePolygon->points[0].push_back(args->x);
 			editablePolygon->points[1].push_back(args->y);
 			editablePolygon->tam++;
-
-			if (editablePolygon->tam > 4)
-			{
-				editablePolygon->Triangulate();
-			}
-
-			if (editablePolygon->tam == 1)
-			{
-				AddPoint(args);
-			}
 		}
 		else
 		{
-			editablePolygon = new EditablePolygon(std::vector<Vector2>());
+			editablePolygon->RemoveLastPoint();
+			editablePolygon = new EditablePolygon();
 		}
 	}
 };

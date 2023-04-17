@@ -49,3 +49,8 @@ void IClickable::MouseOverAll(BaseEvent* baseEvent)
 		i->OnMouseOver(args);
 	}
 }
+
+EventType OnToolEvent::GetStaticType()
+{
+	return EventType::ToolEvent;
+}

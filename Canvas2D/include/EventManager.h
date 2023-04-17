@@ -10,12 +10,10 @@ enum EventType
 	ClickEvent,
 	MouseOverEvent,
 	RenderEvent,
+	ToolEvent,
 	Count
 };
 
-/// <summary>
-/// classe base para a criação de eventos globais que podem ser usados pelo EventManager
-/// </summary>
 class BaseEvent
 {
 public:
@@ -44,10 +42,7 @@ class EventManager
 private:
 	static EventManager* instance;
 	static EventMap eventMap;
-	EventManager() 
-	{
-
-	};
+	EventManager() {};
 
 public:
 
@@ -71,7 +66,6 @@ public:
 		EventType type = T::GetStaticType();
 		EventList eventList = EventManager::eventMap[type];
 
-		//printf("tamanho do evento: %i", eventList.size());
 		for (EvenFunc f : eventList)
 		{
 			f(baseEvent);
@@ -105,7 +99,20 @@ public:
 		EventList* eventList = &EventManager::eventMap[type];
 		eventList->remove(func);
 	}
+
+	template<typename T>
+	void RemoveAllListeners()
+	{
+		if (!std::is_base_of<BaseEvent, T>())
+		{
+			printf("ERRO, o tipo passado não é compatível com BaseEvent\n\n");
+			return;
+		}
+		EventType type = T::GetStaticType();
+		EventList* eventList = &EventManager::eventMap[type];
+		eventList->clear();
+	}
 };
 
 
-#endif // !EVENT_MANAGER
+#endif 
