@@ -12,6 +12,7 @@
 #include "EventManager.h"
 #include "GameEvents.h"
 #include "DrawableDisplay.h"
+#include "ToolBar.h"
 #include "PolygonShape.h" //refatorar nome
 
 
@@ -41,6 +42,8 @@ void keyboardUp(int key)
 //funcao para tratamento de mouse: cliques, movimentos e arrastos
 void mouse(int button, int state, int wheel, int direction, int x, int y)
 {
+    printf("\nMouse: %d, %d, %d, %d, %d, %d", button, state, wheel, direction, x, y);
+
     if (state == 1)
     {
         EventManager::Instance()->InvokeEvent<OnClickEvent>((BaseEvent*) new OnClickEvent(button, state, x, y));
@@ -51,13 +54,13 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 
 int main(void)
 {
-    int screenWidth = 500, screenHeight = 500; //largura e altura inicial da tela. Alteram com o redimensionamento de tela.
+    int screenWidth = 500, screenHeight = 500;
 
     EventManager::Instance()->AddListener<OnRenderEvent>(IRenderable::RenderAll);
     EventManager::Instance()->AddListener<OnClickEvent>(IClickable::ClickAll);
     EventManager::Instance()->AddListener<OnMouseOverEvent>(IClickable::MouseOverAll);
     DrawableDisplay display = DrawableDisplay(Vector2(25, 25), Vector2(450, 450));
-    ToolBar toolBar = ToolBar(Vector2(0, 0), Vector2(40, screenHeight), 5);
+    ToolBar toolBar = ToolBar(&display, Vector2(0, 0), Vector2(40, screenHeight), 5);
 
     CV::init(&screenWidth, &screenHeight, "Canvas 2D");
     CV::run();

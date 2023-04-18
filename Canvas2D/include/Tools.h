@@ -1,14 +1,15 @@
 #pragma once
 #include "EventManager.h"
 #include "GameEvents.h"
-#include "ConcavePolygon.h"
+#include "PolygonShape.h"
 
 class OnToolEvent : public BaseEvent
 {
 public:
 
-
+	PolygonShape* polygon;
 	OnClickEvent* click;
+	OnMouseOverEvent* mouseOver;
 	static EventType GetStaticType();
 
 	EventType GetType() const override
@@ -16,16 +17,31 @@ public:
 		return GetStaticType();
 	}
 
-	OnToolEvent(OnClickEvent* click)
+	OnToolEvent(PolygonShape* polygon, OnClickEvent* click, OnMouseOverEvent* mouseOver)
 	{
-		//this->polygon = polygon;
+		this->polygon = polygon;
 		this->click = click;
+		this->mouseOver = mouseOver;
 	}
 };
 
-class MoveTool : IRenderable
+class MoveTool
 {
 public:
 	static void OnTool(BaseEvent* baseEvent);
 };
+
+class RotateTool 
+{
+public:
+	static void OnTool(BaseEvent* baseEvent);
+};
+
+class ScaleTool
+{
+public:
+	static void OnTool(BaseEvent* baseEvent);
+};
+
+
 

@@ -211,3 +211,36 @@ bool PolygonShape::LineToPolygon(Vector2 p1, Vector2 p2, std::vector<bool>* igno
 
 	return PointToPolygon(p1, ignoreIndex) && PointToPolygon(p2, ignoreIndex);
 }
+
+void PolygonShape::CalculateCenter()
+{
+	float x = 0, y = 0;
+	for (int i = 0; i < tam; i++)
+	{
+		x += points[0][i];
+		y += points[1][i];
+	}
+	center = Vector2(x / tam, y / tam);
+}
+
+void PolygonShape::Rotate(float angle)
+{
+	float x, y;
+	for (int i = 0; i < tam; i++)
+	{
+		x = points[0][i] - center.x;
+		y = points[1][i] - center.y;
+		points[0][i] = x * cos(angle) - y * sin(angle) + center.x;
+		points[1][i] = x * sin(angle) + y * cos(angle) + center.y;
+	}
+}
+
+void PolygonShape::Scale(Vector2 scale)
+{
+	for (int i = 0; i < tam; i++)
+	{
+		points[0][i] = points[0][i] * scale.x;
+		points[1][i] = points[1][i] * scale.y;
+	}
+}
+

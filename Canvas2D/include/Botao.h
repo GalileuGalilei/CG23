@@ -3,10 +3,11 @@
 
 #include "gl_canvas2d.h"
 #include "PolygonShape.h"
+#include <functional>
 class Button : IRenderable, IClickable
 {
 private:
-	void(*callback)();
+	std::function<void()> callback;
 
 protected:
     const float mouseOverColorChange = 0; //o quanto a cor escurece 
@@ -18,7 +19,7 @@ protected:
 	PolygonShape* polygon;
 
 public:
-  Button(Vector2 position, Vector2 size, Color color, const char label[], void(*callback)())
+  Button(Vector2 position, Vector2 size, Color color, const char label[], std::function<void()> callback)
   {
      strcpy_s(this->label, 100, label);
 

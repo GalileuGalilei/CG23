@@ -4,6 +4,7 @@
 #include <vector>
 #include "Vector2.h"
 #include "ConcavePolygon.h"
+#include "Tools.h"
 
 class EditablePolygon : public ConcavePolygon, public IClickable
 {
@@ -14,11 +15,8 @@ public:
 	EditablePolygon() : ConcavePolygon(std::vector<Vector2>()) {}
 
 	void AddPoint(Vector2 point);
-
 	void RemoveLastPoint();
-
 	void SetPointPosition(Vector2 pos, int index);
-
 	void Erase();
 
 private:
@@ -46,12 +44,14 @@ private:
 			return;
 		}
 
-		//	EventManager::Instance()->InvokeEvent<OnToolEvent>((BaseEvent*) new OnToolEvent(this, args));
+		EventManager::Instance()->InvokeEvent<OnToolEvent>((BaseEvent*) new OnToolEvent(this, args, lastMouseOverEvent));
 	}
+
+	OnMouseOverEvent* lastMouseOverEvent = NULL;
 
 	void OnMouseOver(OnMouseOverEvent* args) override
 	{
-		int a = 0;
+		lastMouseOverEvent = args;
 	}
 };
 

@@ -3,7 +3,6 @@
 #include "EditablePolygon.h"
 #include "gl_canvas2d.h"
 #include "Botao.h"
-#include "ToolBar.h"
 #include "GameEvents.h"
 
 /// <summary>
@@ -25,6 +24,11 @@ public:
 		this->position = position;
 		this->size = size;
 		editablePolygon = new EditablePolygon();
+	}
+
+	void SetState(bool state)
+	{
+		IsInsertPolygonEnable = state;
 	}
 
 	void OnClick(OnClickEvent* args) override

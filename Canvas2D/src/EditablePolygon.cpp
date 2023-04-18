@@ -40,3 +40,4 @@ void EditablePolygon::Erase()
 	triangles.clear();
 	tam = 0;
 }
+

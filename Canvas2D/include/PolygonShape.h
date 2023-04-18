@@ -17,6 +17,7 @@ class PolygonShape : IRenderable
 {
 protected:
 	std::vector<float> points[2]; // [0] = x; [1] = y;
+	Vector2 center = Vector2(0,0);
 	Color color = Colors::black;
 	int tam = 0;
 	bool isFilled = false;
@@ -25,6 +26,8 @@ public:
 
 	void Translate(Vector2 vector);
 	void SetPosition(Vector2 pos);
+	void Rotate(float angle);
+	void Scale(Vector2 scale);
 	void SetColor(Color color);
 	void SetColor(float r, float g, float b);
 	void Fill();
@@ -53,7 +56,13 @@ public:
 	/// </summary>
 	bool PointToPolygon(Vector2 point, std::vector<bool>* ignoreIndex);
 
+
 private:
+
+	/// <summary>
+	/// calcula a posição central do polígono
+	/// </summary>
+	void CalculateCenter();
 
 	void OnRender(OnRenderEvent* args) override
 	{
