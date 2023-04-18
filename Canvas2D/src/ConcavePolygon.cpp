@@ -1,4 +1,5 @@
 #include "ConcavePolygon.h"
+#include <vector>
 
 void ConcavePolygon::RenderTriangles()
 {
@@ -12,7 +13,7 @@ void ConcavePolygon::RenderTriangles()
 	}
 
 	int triangulesTam = triangles.size();
-	float triangle[2][3];
+	float triangle[2][3]{};
 
 	for (int i = 0; i < triangulesTam; i += 3)
 	{

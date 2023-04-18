@@ -1,7 +1,9 @@
-#pragma once
+#ifndef GAME_EVENTS
+#define GAME_EVENTS
+
 #include "EventManager.h"
-#include "EditablePolygon.h"
 #include "Vector2.h"
+
 class OnRenderEvent : BaseEvent
 {
 public:
@@ -107,23 +109,4 @@ protected:
 	}
 };
 
-
-class OnToolEvent : BaseEvent
-{
-public:
-
-	EditablePolygon* polygon;
-	OnClickEvent* click;
-	static EventType GetStaticType();
-
-	EventType GetType() const override
-	{
-		return GetStaticType();
-	}
-
-	OnToolEvent(EditablePolygon* polygon, OnClickEvent* click)
-	{
-		this->polygon = polygon;
-		this->click = click;
-	}
-};
+#endif // !GAME_EVENTS

@@ -50,7 +50,3 @@ void IClickable::MouseOverAll(BaseEvent* baseEvent)
 	}
 }
 
-EventType OnToolEvent::GetStaticType()
-{
-	return EventType::ToolEvent;
-}

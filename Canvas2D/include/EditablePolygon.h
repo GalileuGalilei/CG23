@@ -1,9 +1,11 @@
-#pragma once
+#ifndef EDITABLE_POLYGON
+#define EDITABLE_POLYGON
+
 #include <vector>
 #include "Vector2.h"
 #include "ConcavePolygon.h"
 
-class EditablePolygon : public ConcavePolygon, IClickable
+class EditablePolygon : public ConcavePolygon, public IClickable
 {
 public:
 
@@ -44,11 +46,14 @@ private:
 			return;
 		}
 
-	//	EventManager::Instance()->InvokeEvent<OnToolEvent>((BaseEvent*) new OnToolEvent(this, args));
+		//	EventManager::Instance()->InvokeEvent<OnToolEvent>((BaseEvent*) new OnToolEvent(this, args));
 	}
 
 	void OnMouseOver(OnMouseOverEvent* args) override
 	{
-
+		int a = 0;
 	}
 };
+
+
+#endif // !EDITABLE_POLYGON

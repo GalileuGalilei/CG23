@@ -1,16 +1,17 @@
-#pragma once
+#ifndef POLYGON_SHAPE
+#define POLYGON_SHAPE
+
 #include "Vector2.h"
-#include "EventManager.h"
-#include "GameEvents.h"
 #include "gl_canvas2d.h"
 #include <vector>
+#include "GameEvents.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 // obs: foi usado o nome polygonShape para evitar conflitos com a classe Polygon do OpenGL //
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 /// <summary>
-/// classe que define uma base para polygonos cônvacos
+/// classe que define uma base para polygonos quaisquer
 /// </summary>
 class PolygonShape : IRenderable
 {
@@ -70,3 +71,7 @@ private:
 		}
 	}
 };
+
+
+#endif // !POLYGON_SHAPE
+

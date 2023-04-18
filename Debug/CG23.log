@@ -764,7 +764,7 @@
        Substituindo o destino "ComputeMetaGenInputs" no projeto "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.MetaGen.targets" pelo destino "ComputeMetaGenInputs" do projeto "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets".
        Substituindo o destino "GetNativeManifest" no projeto "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" pelo destino "GetNativeManifest" do projeto "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets".
        Substituindo o destino "GetTargetPathWithTargetPlatformMoniker" no projeto "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" pelo destino "GetTargetPathWithTargetPlatformMoniker" do projeto "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.Cpp.DesignTime.targets".
-Compilação de 03/04/2023 04:30:10 iniciada.
+Compilação de 18/04/2023 01:09:54 iniciada.
 O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" no nó 2 (Build destino(s)).
      1>Destino "EnableIntermediateOutputPathMismatchWarning" ignorado devido à condição falsa; ('$(RestoreProjectStyle)' == 'PackageReference') foi avaliado como ('' == 'PackageReference').
      1>Destino "_CheckForInvalidConfigurationAndPlatform" no arquivo "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" do projeto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (o destino "SetTelemetryEnvironmentVariables" depende dele):
@@ -787,10 +787,10 @@ O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alf
      1>Destino "SetTelemetryEnvironmentVariables" no arquivo "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.Cpp.DesignTime.targets" do projeto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (o destino "Build" depende dele):
        Usando a tarefa "SetEnv" do assembly "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.Build.CppTasks.Common.dll".
        Tarefa "SetEnv"
-         VSTEL_SolutionSessionID={9795730C-BCEB-4B24-AB8D-3FD414C3409A}
+         VSTEL_SolutionSessionID={6F56C32F-96B2-42D2-BF42-9FC43556253A}
        Tarefa em execução pronta "SetEnv".
        Tarefa "SetEnv"
-         VSTEL_CurrentSolutionBuildID=1400969107
+         VSTEL_CurrentSolutionBuildID=3473256049
        Tarefa em execução pronta "SetEnv".
        Tarefa "SetEnv"
          VSTEL_ProjectID={a817e59d-92ee-4f92-8b85-39247dab0bc8}
@@ -803,7 +803,7 @@ O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alf
        A tarefa "VCMessage" foi ignorada devido a condição falsa; ('$(WarnAboutIndividualManagedFiles)' == 'true') foi avaliado como ('' == 'true').
        A tarefa "Message" foi ignorada devido a condição falsa; ('$(_REFERENCE_DEBUG)'=='true') foi avaliado como (''=='true').
      1>Destino de compilação pronto"_PrepareForReferenceResolution" no projeto "CG23.vcxproj".
-       Destino "ComputeCrtSDKReference" ignorado devido à condição falsa; ('@(ClCompile)'!='' and '$(WindowsAppContainer)'=='true' and '$(UseCrtSDKReference)' != 'false') foi avaliado como ('Canvas2D\src\EventManager.cpp;Canvas2D\src\GameEvents.cpp;Canvas2D\src\gl_canvas2d.cpp;...'!='' and 'false'=='true' and '' != 'false').
+       Destino "ComputeCrtSDKReference" ignorado devido à condição falsa; ('@(ClCompile)'!='' and '$(WindowsAppContainer)'=='true' and '$(UseCrtSDKReference)' != 'false') foi avaliado como ('Canvas2D\src\EditablePolygon.cpp;Canvas2D\src\EventManager.cpp;Canvas2D\src\GameEvents.cpp;...'!='' and 'false'=='true' and '' != 'false').
      1>Destino "BeforeResolveReferences" no arquivo "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" do projeto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (o destino "ResolveReferences" depende dele):
      1>Destino de compilação pronto"BeforeResolveReferences" no projeto "CG23.vcxproj".
      1>Destino "AssignProjectConfiguration" no arquivo "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" do projeto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (o destino "ResolveReferences" depende dele):
@@ -933,7 +933,7 @@ O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alf
        Tarefa em execução pronta "MakeDir".
      1>Destino de compilação pronto"PrepareForBuild" no projeto "CG23.vcxproj".
        Destino "_PrepareForReferenceResolution" ignorado. Compilado anteriormente com êxito.
-       Destino "ComputeCrtSDKReference" ignorado devido à condição falsa; ('@(ClCompile)'!='' and '$(WindowsAppContainer)'=='true' and '$(UseCrtSDKReference)' != 'false') foi avaliado como ('Canvas2D\src\EventManager.cpp;Canvas2D\src\GameEvents.cpp;Canvas2D\src\gl_canvas2d.cpp;...'!='' and 'false'=='true' and '' != 'false').
+       Destino "ComputeCrtSDKReference" ignorado devido à condição falsa; ('@(ClCompile)'!='' and '$(WindowsAppContainer)'=='true' and '$(UseCrtSDKReference)' != 'false') foi avaliado como ('Canvas2D\src\EditablePolygon.cpp;Canvas2D\src\EventManager.cpp;Canvas2D\src\GameEvents.cpp;...'!='' and 'false'=='true' and '' != 'false').
        Destino "GetInstalledSDKLocations" ignorado devido à condição falsa; ('@(SDKReference)' != '') foi avaliado como ('' != '').
      1>Destino "ResolveSDKReferences" no arquivo "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Microsoft.Common.CurrentVersion.targets" do projeto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (o destino "ResolveAssemblyReferences" depende dele):
        A tarefa "ResolveSDKReference" foi ignorada devido a condição falsa; ('@(SDKReference)'!='') foi avaliado como (''!='').
@@ -965,7 +965,7 @@ O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alf
        Tarefa em execução pronta "WriteLinesToFile".
        Usando a tarefa "Touch" do assembly "Microsoft.Build.Tasks.Core, Version=15.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a".
        Tarefa "Touch"
-         Criando "Debug\CG23.tlog\unsuccessfulbuild" porque "AlwaysCreate" foi especificado.
+         Tocando "Debug\CG23.tlog\unsuccessfulbuild".
        Tarefa em execução pronta "Touch".
      1>Destino de compilação pronto"InitializeBuildStatus" no projeto "CG23.vcxproj".
        Destino "PrepareProjectReferences" ignorado. Compilado anteriormente com êxito.
@@ -1061,13 +1061,17 @@ O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alf
        A tarefa "Message" foi ignorada devido a condição falsa; ('$(_REFERENCE_DEBUG)'=='true') foi avaliado como (''=='true').
      1>Destino de compilação pronto"ComputeReferenceCLInput" no projeto "CG23.vcxproj".
      1>Destino "WarnCompileDuplicatedFilename" no arquivo "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" do projeto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (o destino "_ClCompile" depende dele):
+       A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'EditablePolygon.cpp' != 'EditablePolygon.cpp' and 'Debug\' == 'Debug\').
        A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'EventManager.cpp' != 'EventManager.cpp' and 'Debug\' == 'Debug\').
        A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'GameEvents.cpp' != 'GameEvents.cpp' and 'Debug\' == 'Debug\').
        A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'gl_canvas2d.cpp' != 'gl_canvas2d.cpp' and 'Debug\' == 'Debug\').
        A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'main.cpp' != 'main.cpp' and 'Debug\' == 'Debug\').
-       A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'Polygon.cpp' != 'Polygon.cpp' and 'Debug\' == 'Debug\').
+       A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'PolygonShape.cpp' != 'PolygonShape.cpp' and 'Debug\' == 'Debug\').
        A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'Relogio.cpp' != 'Relogio.cpp' and 'Debug\' == 'Debug\').
        A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'DrawableDisplay.cpp' != 'DrawableDisplay.cpp' and 'Debug\' == 'Debug\').
+       A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'ConcavePolygon.cpp' != 'ConcavePolygon.cpp' and 'Debug\' == 'Debug\').
+       A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'ToolBar.cpp' != 'ToolBar.cpp' and 'Debug\' == 'Debug\').
+       A tarefa "VCMessage" foi ignorada devido a condição falsa; ('%(ClCompile.ExcludedFromBuild)' != 'true' and '%(Filename)%(Extension)' != '@(ClCompile->'%(Filename)%(Extension)')' and '%(ObjectFileName)' == '@(ClCompile->Metadata(ObjectFileName)->Distinct())') foi avaliado como ('' != 'true' and 'Tools.cpp' != 'Tools.cpp' and 'Debug\' == 'Debug\').
      1>Destino de compilação pronto"WarnCompileDuplicatedFilename" no projeto "CG23.vcxproj".
      1>Destino "FixupCLCompileOptions" no arquivo "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets" do projeto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (o destino "_ClCompile" depende dele):
      1>Destino de compilação pronto"FixupCLCompileOptions" no projeto "CG23.vcxproj".
@@ -1087,7 +1091,7 @@ O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alf
      1>Destino "SelectClCompile" no arquivo "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets" do projeto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (o destino "ClCompile" depende dele):
      1>Destino de compilação pronto"SelectClCompile" no projeto "CG23.vcxproj".
        Destino "SelectAnalysisManifest" ignorado devido à condição falsa; ('$(RunMsvcAnalysis)'=='true' and '$(SelectedFiles)'!='') foi avaliado como ('false'=='true' and ''!='').
-       Destino "ManagedIncrementalBuildPreProcessDependencyGraph" ignorado devido à condição falsa; ('@(ClCompile)' != '' and '$(EnableManagedIncrementalBuild)' == 'True') foi avaliado como ('Canvas2D\src\EventManager.cpp;Canvas2D\src\GameEvents.cpp;Canvas2D\src\gl_canvas2d.cpp;...' != '' and 'false' == 'True').
+       Destino "ManagedIncrementalBuildPreProcessDependencyGraph" ignorado devido à condição falsa; ('@(ClCompile)' != '' and '$(EnableManagedIncrementalBuild)' == 'True') foi avaliado como ('Canvas2D\src\EditablePolygon.cpp;Canvas2D\src\EventManager.cpp;Canvas2D\src\GameEvents.cpp;...' != '' and 'false' == 'True').
      1>Destino "ClCompile" no arquivo "C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets" do projeto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (o destino "_ClCompile" depende dele):
        A tarefa "Delete" foi ignorada devido a condição falsa; ('%(ClCompile.DebugInformationFormat)' != '' and '%(ClCompile.DebugInformationFormat)' != 'None' and '%(ClCompile.DebugInformationFormat)' != 'OldStyle' and '%(ClCompile.ProgramDataBaseFileName)' != '' and !Exists(%(ClCompile.ProgramDataBaseFileName))) foi avaliado como ('EditAndContinue' != '' and 'EditAndContinue' != 'None' and 'EditAndContinue' != 'OldStyle' and 'Debug\vc143.pdb' != '' and !Exists(Debug\vc143.pdb)).
        A tarefa "MultiToolTask" foi ignorada devido a condição falsa; ('%(ClCompile.CompilerIteration)' == 'Modules') foi avaliado como ('' == 'Modules').
@@ -1097,29 +1101,101 @@ O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alf
        Tarefa "CL"
          Ler Logs de Controle:
          	Debug\CG23.tlog\CL.read.1.tlog
-         Saídas para C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\DRAWABLEDISPLAY.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\EVENTMANAGER.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\GAMEEVENTS.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\GL_CANVAS2D.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\MAIN.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\POLYGON.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\RELOGIO.CPP:
+         Saídas para C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\CONCAVEPOLYGON.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\DRAWABLEDISPLAY.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\EDITABLEPOLYGON.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\EVENTMANAGER.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\GAMEEVENTS.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\GL_CANVAS2D.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\MAIN.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\POLYGONSHAPE.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\RELOGIO.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\TOOLBAR.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\TOOLS.CPP:
+         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EDITABLEPOLYGON.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EVENTMANAGER.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GAMEEVENTS.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GL_CANVAS2D.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\MAIN.OBJ
-         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\POLYGON.OBJ
+         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\POLYGONSHAPE.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\RELOGIO.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\DRAWABLEDISPLAY.OBJ
-         Canvas2D\src\GameEvents.cpp será compilado já que C:\Users\alfre\source\repos\CG23\Canvas2D\src\GameEvents.cpp foi modificado em 03/04/2023 04:30:10.
-         Saídas para C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\GAMEEVENTS.CPP:
-         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GAMEEVENTS.OBJ
+         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\CONCAVEPOLYGON.OBJ
+         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\TOOLBAR.OBJ
+         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\TOOLS.OBJ
+         Canvas2D\src\ConcavePolygon.cpp será compilado, pois não foi encontrado no log de controle.
+         Canvas2D\src\DrawableDisplay.cpp será compilado, pois não foi encontrado no log de controle.
+         Canvas2D\src\PolygonShape.cpp será compilado, pois não foi encontrado no log de controle.
+         Canvas2D\src\ToolBar.cpp será compilado, pois não foi encontrado no log de controle.
+         Canvas2D\src\Tools.cpp será compilado, pois não foi encontrado no log de controle.
+         Canvas2D\src\main.cpp será compilado, pois não foi encontrado no log de controle.
+         Nenhuma saída para C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\CONCAVEPOLYGON.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\DRAWABLEDISPLAY.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\MAIN.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\POLYGONSHAPE.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\TOOLBAR.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\TOOLS.CPP foi encontrada no log de controle; é necessária a compilação da origem.
          Logs de Controle de Gravação:
          	Debug\CG23.tlog\CL.write.1.tlog
          Variáveis de Ambiente passadas para a ferramenta:
-           VS_UNICODE_OUTPUT=1608
-         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\HostX86\x86\CL.exe /c /IC:\Users\alfre\source\repos\CG23\Canvas2D\src /IC:\Users\alfre\source\repos\CG23\Canvas2D\include /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /permissive- /Fo"Debug\\" /Fd"Debug\vc143.pdb" /external:W3 /Gd /TP /analyze- /FC /errorReport:prompt Canvas2D\src\GameEvents.cpp
+           VS_UNICODE_OUTPUT=1772
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\HostX86\x86\CL.exe /c /IC:\Users\alfre\source\repos\CG23\Canvas2D\src /IC:\Users\alfre\source\repos\CG23\Canvas2D\include /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /permissive- /Fo"Debug\\" /Fd"Debug\vc143.pdb" /external:W3 /Gd /TP /analyze- /FC /errorReport:prompt Canvas2D\src\main.cpp Canvas2D\src\PolygonShape.cpp Canvas2D\src\DrawableDisplay.cpp Canvas2D\src\ConcavePolygon.cpp Canvas2D\src\ToolBar.cpp Canvas2D\src\Tools.cpp
          Comando de controle:
-         C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Tracker.exe /d "C:\Program Files (x86)\MSBuild\15.0\FileTracker\FileTracker32.dll" /i C:\Users\alfre\source\repos\CG23\Debug\CG23.tlog /r C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\GAMEEVENTS.CPP /b MSBuildConsole_CancelEventd4500ee105ee4b3396c20c6e2d9aad8e  /c "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\HostX86\x86\CL.exe"  /c /IC:\Users\alfre\source\repos\CG23\Canvas2D\src /IC:\Users\alfre\source\repos\CG23\Canvas2D\include /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /permissive- /Fo"Debug\\" /Fd"Debug\vc143.pdb" /external:W3 /Gd /TP /analyze- /FC /errorReport:prompt Canvas2D\src\GameEvents.cpp
-         GameEvents.cpp
+         C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Tracker.exe /d "C:\Program Files (x86)\MSBuild\15.0\FileTracker\FileTracker32.dll" /i C:\Users\alfre\source\repos\CG23\Debug\CG23.tlog /r "C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\CONCAVEPOLYGON.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\DRAWABLEDISPLAY.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\MAIN.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\POLYGONSHAPE.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\TOOLBAR.CPP|C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\SRC\TOOLS.CPP" /b MSBuildConsole_CancelEvent8c79426eee244ad2bda75a4afa7f978e  /c "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\HostX86\x86\CL.exe"  /c /IC:\Users\alfre\source\repos\CG23\Canvas2D\src /IC:\Users\alfre\source\repos\CG23\Canvas2D\include /ZI /JMC /nologo /W3 /WX- /diagnostics:column /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /permissive- /Fo"Debug\\" /Fd"Debug\vc143.pdb" /external:W3 /Gd /TP /analyze- /FC /errorReport:prompt Canvas2D\src\main.cpp Canvas2D\src\PolygonShape.cpp Canvas2D\src\DrawableDisplay.cpp Canvas2D\src\ConcavePolygon.cpp Canvas2D\src\ToolBar.cpp Canvas2D\src\Tools.cpp
+         main.cpp
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\EditablePolygon.h(44,44): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\EditablePolygon.h(44,35): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(55,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(56,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,34): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(47,58): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(47,49): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(76,51): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(76,42): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(77,45): warning C4244: 'argumento': conversão de 'int' para '_Ty', possível perda de dados
+                 with
+                 [
+                     _Ty=float
+                 ]
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(78,45): warning C4244: 'argumento': conversão de 'int' para '_Ty', possível perda de dados
+                 with
+                 [
+                     _Ty=float
+                 ]
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\src\main.cpp(60,58): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         PolygonShape.cpp
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\src\PolygonShape.cpp(22,10): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+         DrawableDisplay.cpp
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\EditablePolygon.h(44,44): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\EditablePolygon.h(44,35): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(55,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(56,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,34): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(47,58): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(47,49): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(76,51): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(76,42): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(77,45): warning C4244: 'argumento': conversão de 'int' para '_Ty', possível perda de dados
+                 with
+                 [
+                     _Ty=float
+                 ]
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(78,45): warning C4244: 'argumento': conversão de 'int' para '_Ty', possível perda de dados
+                 with
+                 [
+                     _Ty=float
+                 ]
+         ConcavePolygon.cpp
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         ToolBar.cpp
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(55,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(56,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,34): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         Tools.cpp
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+     1>C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         Gerando Código...
        Tarefa em execução pronta "CL".
      1>Destino de compilação pronto"ClCompile" no projeto "CG23.vcxproj".
        Destino "RunSelectedFileNativeCodeAnalysis" ignorado devido à condição falsa; ('$(RunMsvcAnalysis)'=='true' and '$(SelectedFiles)'!='') foi avaliado como ('false'=='true' and ''!='').
-       Destino "ManagedIncrementalBuildPostProcessDependencyGraph" ignorado devido à condição falsa; ('@(ClCompile)' != '' and '$(EnableManagedIncrementalBuild)' == 'True') foi avaliado como ('Canvas2D\src\EventManager.cpp;Canvas2D\src\GameEvents.cpp;Canvas2D\src\gl_canvas2d.cpp;...' != '' and 'false' == 'True').
+       Destino "ManagedIncrementalBuildPostProcessDependencyGraph" ignorado devido à condição falsa; ('@(ClCompile)' != '' and '$(EnableManagedIncrementalBuild)' == 'True') foi avaliado como ('Canvas2D\src\EditablePolygon.cpp;Canvas2D\src\EventManager.cpp;Canvas2D\src\GameEvents.cpp;...' != '' and 'false' == 'True').
        Destino "NoAnalysisToolEnabledWarning" ignorado devido à condição falsa; ('$(RunCppAnalysis)'=='true' AND '$(EnableMicrosoftCodeAnalysis)'=='false' AND '$(EnableClangTidyCodeAnalysis)'=='false') foi avaliado como ('false'=='true' AND 'true'=='false' AND 'false'=='false').
        Destino "RunSelectedFileClangTidy" ignorado devido à condição falsa; ('$(RunClangCppAnalysis)'=='true' AND '$(SelectedFiles)'!='') foi avaliado como ('false'=='true' AND ''!='').
        Destino "MicrosoftAnalysisIncompatiableWithClangCl" ignorado devido à condição falsa; ('$(RunCppAnalysis)'=='true' AND '$(EnableMicrosoftCodeAnalysis)'=='true' AND '$(UseClangCl)'=='true') foi avaliado como ('false'=='true' AND 'true'=='true' AND ''=='true').
@@ -1232,11 +1308,11 @@ O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alf
          	Debug\CG23.tlog\link.write.1.tlog
          Ler Logs de Controle:
          	Debug\CG23.tlog\link.read.1.tlog
-         Saídas para C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\DRAWABLEDISPLAY.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EVENTMANAGER.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GAMEEVENTS.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GL_CANVAS2D.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\MAIN.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\POLYGON.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\RELOGIO.OBJ:
+         Saídas para C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\CONCAVEPOLYGON.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\DRAWABLEDISPLAY.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EDITABLEPOLYGON.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EVENTMANAGER.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GAMEEVENTS.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GL_CANVAS2D.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\MAIN.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\POLYGONSHAPE.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\RELOGIO.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\TOOLBAR.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\TOOLS.OBJ:
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\CG23.EXE
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\CG23.ILK
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\CG23.PDB
-         Entradas para C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\DRAWABLEDISPLAY.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EVENTMANAGER.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GAMEEVENTS.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GL_CANVAS2D.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\MAIN.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\POLYGON.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\RELOGIO.OBJ:
+         Entradas para C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\CONCAVEPOLYGON.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\DRAWABLEDISPLAY.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EDITABLEPOLYGON.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EVENTMANAGER.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GAMEEVENTS.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GL_CANVAS2D.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\MAIN.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\POLYGONSHAPE.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\RELOGIO.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\TOOLBAR.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\TOOLS.OBJ:
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\CANVAS2D\LIB\FREEGLUT.LIB
          	C:\PROGRAM FILES (X86)\WINDOWS KITS\10\LIB\10.0.22000.0\UM\X86\KERNEL32.LIB
          	C:\PROGRAM FILES (X86)\WINDOWS KITS\10\LIB\10.0.22000.0\UM\X86\USER32.LIB
@@ -1250,42 +1326,53 @@ O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alf
          	C:\PROGRAM FILES (X86)\WINDOWS KITS\10\LIB\10.0.22000.0\UM\X86\UUID.LIB
          	C:\PROGRAM FILES (X86)\WINDOWS KITS\10\LIB\10.0.22000.0\UM\X86\ODBC32.LIB
          	C:\PROGRAM FILES (X86)\WINDOWS KITS\10\LIB\10.0.22000.0\UM\X86\ODBCCP32.LIB
+         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EDITABLEPOLYGON.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EVENTMANAGER.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GAMEEVENTS.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GL_CANVAS2D.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\MAIN.OBJ
-         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\POLYGON.OBJ
+         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\POLYGONSHAPE.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\RELOGIO.OBJ
          	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\DRAWABLEDISPLAY.OBJ
+         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\CONCAVEPOLYGON.OBJ
+         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\TOOLBAR.OBJ
+         	C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\TOOLS.OBJ
          	C:\WINDOWS\SYSTEM32\TZRES.DLL
          	C:\WINDOWS\GLOBALIZATION\SORTING\SORTDEFAULT.NLS
          	C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\2022\COMMUNITY\VC\TOOLS\MSVC\14.35.32215\LIB\X86\MSVCPRTD.LIB
-         	C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\2022\COMMUNITY\VC\TOOLS\MSVC\14.35.32215\LIB\X86\MSVCRTD.LIB
-         	C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\2022\COMMUNITY\VC\TOOLS\MSVC\14.35.32215\LIB\X86\OLDNAMES.LIB
          	C:\PROGRAM FILES (X86)\WINDOWS KITS\10\LIB\10.0.22000.0\UM\X86\GLU32.LIB
          	C:\PROGRAM FILES (X86)\WINDOWS KITS\10\LIB\10.0.22000.0\UM\X86\OPENGL32.LIB
          	C:\PROGRAM FILES (X86)\WINDOWS KITS\10\LIB\10.0.22000.0\UM\X86\WINMM.LIB
+         	C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\2022\COMMUNITY\VC\TOOLS\MSVC\14.35.32215\LIB\X86\MSVCRTD.LIB
+         	C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\2022\COMMUNITY\VC\TOOLS\MSVC\14.35.32215\LIB\X86\OLDNAMES.LIB
          	C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\2022\COMMUNITY\VC\TOOLS\MSVC\14.35.32215\LIB\X86\VCRUNTIMED.LIB
          	C:\PROGRAM FILES (X86)\WINDOWS KITS\10\LIB\10.0.22000.0\UCRT\X86\UCRTD.LIB
-         	C:\PROGRAM FILES\MICROSOFT VISUAL STUDIO\2022\COMMUNITY\VC\TOOLS\MSVC\14.35.32215\BIN\HOSTX86\X86\CVTRES.EXE
-         É necessária a compilação da origem: a entrada C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GAMEEVENTS.OBJ é mais nova que a saída C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\CG23.EXE.
+         É necessária a compilação da origem: a entrada C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\MAIN.OBJ é mais nova que a saída C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\CG23.PDB.
          Variáveis de Ambiente passadas para a ferramenta:
-           VS_UNICODE_OUTPUT=1204
-         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\alfre\source\repos\CG23\Debug\CG23.exe" /INCREMENTAL /ILK:"Debug\CG23.ilk" /NOLOGO /LIBPATH:C:\Users\alfre\source\repos\CG23\Canvas2D\lib freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\alfre\source\repos\CG23\Debug\CG23.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\alfre\source\repos\CG23\Debug\CG23.lib" /MACHINE:X86 Debug\EventManager.obj
+           VS_UNICODE_OUTPUT=1328
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\HostX86\x86\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\alfre\source\repos\CG23\Debug\CG23.exe" /INCREMENTAL /ILK:"Debug\CG23.ilk" /NOLOGO /LIBPATH:C:\Users\alfre\source\repos\CG23\Canvas2D\lib freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\alfre\source\repos\CG23\Debug\CG23.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\alfre\source\repos\CG23\Debug\CG23.lib" /MACHINE:X86 Debug\EditablePolygon.obj
+         Debug\EventManager.obj
          Debug\GameEvents.obj
          Debug\gl_canvas2d.obj
          Debug\main.obj
-         Debug\Polygon.obj
+         Debug\PolygonShape.obj
          Debug\Relogio.obj
          Debug\DrawableDisplay.obj
+         Debug\ConcavePolygon.obj
+         Debug\ToolBar.obj
+         Debug\Tools.obj
          Comando de controle:
-         C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Tracker.exe /a /d "C:\Program Files (x86)\MSBuild\15.0\FileTracker\FileTracker32.dll" /i C:\Users\alfre\source\repos\CG23\Debug\CG23.tlog /r "C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\DRAWABLEDISPLAY.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EVENTMANAGER.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GAMEEVENTS.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GL_CANVAS2D.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\MAIN.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\POLYGON.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\RELOGIO.OBJ" /b MSBuildConsole_CancelEvent84fe406cf1db467c8cc5bbb90a6d590e  /c "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\HostX86\x86\link.exe"  /ERRORREPORT:PROMPT /OUT:"C:\Users\alfre\source\repos\CG23\Debug\CG23.exe" /INCREMENTAL /ILK:"Debug\CG23.ilk" /NOLOGO /LIBPATH:C:\Users\alfre\source\repos\CG23\Canvas2D\lib freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\alfre\source\repos\CG23\Debug\CG23.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\alfre\source\repos\CG23\Debug\CG23.lib" /MACHINE:X86 Debug\EventManager.obj
+         C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Current\Bin\amd64\Tracker.exe /a /d "C:\Program Files (x86)\MSBuild\15.0\FileTracker\FileTracker32.dll" /i C:\Users\alfre\source\repos\CG23\Debug\CG23.tlog /r "C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\CONCAVEPOLYGON.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\DRAWABLEDISPLAY.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EDITABLEPOLYGON.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\EVENTMANAGER.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GAMEEVENTS.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\GL_CANVAS2D.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\MAIN.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\POLYGONSHAPE.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\RELOGIO.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\TOOLBAR.OBJ|C:\USERS\ALFRE\SOURCE\REPOS\CG23\DEBUG\TOOLS.OBJ" /b MSBuildConsole_CancelEvent35cbafad50e24e5182cfe84b7bb40a05  /c "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.35.32215\bin\HostX86\x86\link.exe"  /ERRORREPORT:PROMPT /OUT:"C:\Users\alfre\source\repos\CG23\Debug\CG23.exe" /INCREMENTAL /ILK:"Debug\CG23.ilk" /NOLOGO /LIBPATH:C:\Users\alfre\source\repos\CG23\Canvas2D\lib freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\alfre\source\repos\CG23\Debug\CG23.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\alfre\source\repos\CG23\Debug\CG23.lib" /MACHINE:X86 Debug\EditablePolygon.obj
+         Debug\EventManager.obj
          Debug\GameEvents.obj
          Debug\gl_canvas2d.obj
          Debug\main.obj
-         Debug\Polygon.obj
+         Debug\PolygonShape.obj
          Debug\Relogio.obj
          Debug\DrawableDisplay.obj
+         Debug\ConcavePolygon.obj
+         Debug\ToolBar.obj
+         Debug\Tools.obj
        Tarefa em execução pronta "Link".
        Tarefa "Message"
          CG23.vcxproj -> C:\Users\alfre\source\repos\CG23\Debug\CG23.exe
@@ -1501,7 +1588,53 @@ O detalhamento do log está definido como: Detailed.     1>Projeto "C:\Users\alf
      1>Projeto de compilação pronto "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (Build destino(s)).
 
 Compilação com êxito.
-    0 Aviso(s)
+
+       "C:\Users\alfre\source\repos\CG23\CG23.vcxproj" (Build destino) (1) ->
+       (ClCompile destino) -> 
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\EditablePolygon.h(44,44): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\EditablePolygon.h(44,35): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(55,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(56,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,34): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(47,58): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(47,49): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(76,51): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(76,42): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(77,45): warning C4244: 'argumento': conversão de 'int' para '_Ty', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(78,45): warning C4244: 'argumento': conversão de 'int' para '_Ty', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\src\main.cpp(60,58): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\src\PolygonShape.cpp(22,10): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\EditablePolygon.h(44,44): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\EditablePolygon.h(44,35): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(55,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(56,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,34): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(47,58): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(47,49): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(76,51): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(76,42): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(77,45): warning C4244: 'argumento': conversão de 'int' para '_Ty', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\DrawableDisplay.h(78,45): warning C4244: 'argumento': conversão de 'int' para '_Ty', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(55,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(56,9): warning C4244: 'inicializando': conversão de 'float' para 'int', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\ToolBar.h(57,34): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,37): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+         C:\Users\alfre\source\repos\CG23\Canvas2D\include\GameEvents.h(85,27): warning C4244: 'argumento': conversão de 'int' para 'float', possível perda de dados
+
+    42 Aviso(s)
     0 Erro(s)
 
-Tempo Decorrido 00:00:00.85
+Tempo Decorrido 00:00:04.15

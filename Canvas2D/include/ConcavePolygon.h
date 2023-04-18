@@ -1,19 +1,11 @@
-#pragma once
-#include <vector>
-#include "Vector2.h"
-#include "PolygonShape.h"
+#ifndef CONCAVE_POLYGON
+#define CONCAVE_POLYGON
 
+#include "PolygonShape.h"
 
 class ConcavePolygon : public PolygonShape
 {
 public:
-
-	std::vector<int> triangles;
-
-	/// <summary>
-	/// insere os indices dos triangulos no vetor triangles usando o algoritmo ear-clipping
-	/// </summary>
-	void Triangulate();
 
 	ConcavePolygon(std::vector<Vector2> points) : PolygonShape(points) 
 	{
@@ -31,6 +23,12 @@ public:
 
 protected:
 
+	std::vector<int> triangles;
+
+	/// <summary>
+	/// insere os indices dos triangulos no vetor triangles usando o algoritmo ear-clipping
+	/// </summary>
+	void Triangulate();
 
 	/// <summary>
 	/// verifica se o ponto pode ser adicionado ao poligono sem causar auto intersecção
@@ -59,3 +57,6 @@ private:
 		RenderTriangles();
 	}
 };
+
+
+#endif // ! CONCAVE_POLYGON

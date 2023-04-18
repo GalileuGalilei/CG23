@@ -130,25 +130,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Canvas2D\src\EditablePolygon.cpp" />
     <ClCompile Include="Canvas2D\src\EventManager.cpp" />
     <ClCompile Include="Canvas2D\src\GameEvents.cpp" />
     <ClCompile Include="Canvas2D\src\gl_canvas2d.cpp" />
     <ClCompile Include="Canvas2D\src\main.cpp" />
-    <ClCompile Include="Canvas2D\src\Polygon.cpp" />
+    <ClCompile Include="Canvas2D\src\PolygonShape.cpp" />
     <ClCompile Include="Canvas2D\src\Relogio.cpp" />
     <ClCompile Include="Canvas2D\src\DrawableDisplay.cpp" />
+    <ClCompile Include="Canvas2D\src\ConcavePolygon.cpp" />
+    <ClCompile Include="Canvas2D\src\ToolBar.cpp" />
+    <ClCompile Include="Canvas2D\src\Tools.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Canvas2D\include\auxiliar.h" />
     <ClInclude Include="Canvas2D\include\Bola.h" />
     <ClInclude Include="Canvas2D\include\Botao.h" />
+    <ClInclude Include="Canvas2D\include\EditablePolygon.h" />
     <ClInclude Include="Canvas2D\include\EventManager.h" />
     <ClInclude Include="Canvas2D\include\GameEvents.h" />
     <ClInclude Include="Canvas2D\include\gl_canvas2d.h" />
-    <ClInclude Include="Canvas2D\include\Polygon.h" />
+    <ClInclude Include="Canvas2D\include\PolygonShape.h" />
     <ClInclude Include="Canvas2D\include\Relogio.h" />
+    <ClInclude Include="Canvas2D\include\ToolBar.h" />
     <ClInclude Include="Canvas2D\include\Vector2.h" />
     <ClInclude Include="Canvas2D\include\DrawableDisplay.h" />
+    <ClInclude Include="Canvas2D\include\ConcavePolygon.h" />
+    <ClInclude Include="Canvas2D\include\Tools.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

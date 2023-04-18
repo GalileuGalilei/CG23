@@ -1,6 +1,7 @@
 #pragma once
 #include "gl_canvas2d.h"
 #include "GameEvents.h"
+#include "Tools.h"
 #include "Botao.h"
 #include <list>
 
