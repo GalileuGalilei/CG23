@@ -16,6 +16,10 @@ private :
 	DrawableDisplay* display;
 	const int offset;
 
+	MoveTool* moveTool;
+	RotateTool* rotateTool;
+	ScaleTool* scaleTool;
+
 public :
 	ToolBar(DrawableDisplay* display, Vector2 postion, Vector2 size, int buttonOffset) : offset(buttonOffset)
 	{
@@ -24,6 +28,22 @@ public :
 		this->display = display;
 		buttonSize = Vector2(size.x - offset, size.x - offset);
 		SetToolButtons();
+
+		EventManager::Instance()->AddListener<OnToolEvent>(ITool::OnTool);
+
+		moveTool = new MoveTool();
+		rotateTool = new RotateTool();
+		scaleTool = new ScaleTool();
+	}
+
+	~ToolBar()
+	{
+		for (Button* b : buttonList)
+		{
+			delete b;
+		}
+
+		buttonList.clear();
 	}
 
 private:
@@ -47,28 +67,28 @@ private:
 	{
 		AddButton([this]() 
 			{
-				EventManager::Instance()->RemoveAllListeners<OnToolEvent>();
-				EventManager::Instance()->AddListener<OnToolEvent>(MoveTool::OnTool);
+				ITool::DisableAllTools();
+				moveTool->AddToolListeners();
 				display->SetState(false);
 			}, Colors::green);
 
 		AddButton([this]() 
 			{
-				EventManager::Instance()->RemoveAllListeners<OnToolEvent>();
-				EventManager::Instance()->AddListener<OnToolEvent>(RotateTool::OnTool);
+				ITool::DisableAllTools();
+				rotateTool->AddToolListeners();
 				display->SetState(false);
 			}, Colors::red);
 
 		AddButton([this]() 
 			{
-				EventManager::Instance()->RemoveAllListeners<OnToolEvent>();
-				EventManager::Instance()->AddListener<OnToolEvent>(ScaleTool::OnTool);
+				ITool::DisableAllTools();
+				scaleTool->AddToolListeners();
 				display->SetState(false);
 			}, Colors::orange);
 
 		AddButton([this]()
 			{
-				EventManager::Instance()->RemoveAllListeners<OnToolEvent>();
+				ITool::DisableAllTools();
 				display->SetState(true);
 			}, Colors::blue);
 	}

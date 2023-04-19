@@ -44,7 +44,7 @@ private:
 			return;
 		}
 
-		EventManager::Instance()->InvokeEvent<OnToolEvent>((BaseEvent*) new OnToolEvent(this, args, lastMouseOverEvent));
+		EventManager::Instance()->InvokeEvent<OnToolEvent>((BaseEvent*) new OnToolEvent(this));
 	}
 
 	OnMouseOverEvent* lastMouseOverEvent = NULL;

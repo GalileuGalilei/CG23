@@ -74,13 +74,14 @@ public:
 		return GetStaticType();
 	}
 
-	int x, y;
+	int x, y, wheel;
 	Vector2 translation;
 
-	OnMouseOverEvent(int x, int y)
+	OnMouseOverEvent(int x, int y, int wheel)
 	{
 		this->x = x;
 		this->y = y;
+		this->wheel = wheel;
 
 		translation = Vector2(x - oldX, y - oldY);
 	}

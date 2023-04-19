@@ -44,16 +44,21 @@ bool ConcavePolygon::IsValiblePoint(Vector2 point)
 	}
 
 	//possível nova linha
-	Vector2 p1 = Vector2(points[0][points[0].size() - 1], points[1][points[1].size() - 1]);
-	Vector2 p2 = point;
+	Vector2 lst = Vector2(points[0][points[0].size() - 1], points[1][points[1].size() - 1]);
+	Vector2 fst = Vector2(points[0][0], points[1][0]);
 
-	Vector2 dir = p1 - p2;
-	dir.normalize();
+	Vector2 dir1 = fst - point;
+	Vector2 dir2 = lst - point;
 
-	p1 = p1 - dir;
-	p2 = p2 + dir;
+	dir1.normalize();
+	dir2.normalize();
 
-	return !(LineIntersectingCount(p1, p2, NULL) > 0);
+	Vector2 p1 = point + dir1;
+	Vector2 p2 = fst - dir1;
+	Vector2 p3 = point + dir2;
+	Vector2 p4 = lst - dir2;
+
+	return !(LineIntersectingCount(p1, p2, NULL) > 0 || LineIntersectingCount(p1, p2, NULL) > 0);
 }
 
 bool ConcavePolygon::IsValiblePolygon()

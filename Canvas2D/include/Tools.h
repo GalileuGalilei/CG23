@@ -8,8 +8,6 @@ class OnToolEvent : public BaseEvent
 public:
 
 	PolygonShape* polygon;
-	OnClickEvent* click;
-	OnMouseOverEvent* mouseOver;
 	static EventType GetStaticType();
 
 	EventType GetType() const override
@@ -17,30 +15,101 @@ public:
 		return GetStaticType();
 	}
 
-	OnToolEvent(PolygonShape* polygon, OnClickEvent* click, OnMouseOverEvent* mouseOver)
+	OnToolEvent(PolygonShape* polygon)
 	{
 		this->polygon = polygon;
-		this->click = click;
-		this->mouseOver = mouseOver;
+
 	}
 };
 
-class MoveTool
+class ITool
 {
+private:
+	static std::list<ITool*> toolList;
+
 public:
-	static void OnTool(BaseEvent* baseEvent);
+	static void DisableAllTools()
+	{
+		for (ITool* tool : toolList)
+		{
+			tool->RemoveToolListeners();
+		}
+	}
+
+	static void OnTool(BaseEvent* baseEvent)
+	{
+		OnToolEvent* args = (OnToolEvent*)baseEvent;
+		selectedPolygon = args->polygon;
+	}
+
+protected:
+	ITool()
+	{
+		toolList.push_back(this);
+	}
+
+	static PolygonShape* selectedPolygon;
+	virtual void RemoveToolListeners() = 0;
+	virtual void AddToolListeners() = 0;
 };
 
-class RotateTool 
+class MoveTool : public ITool
 {
+private:
+	static bool isMoving;
+
 public:
-	static void OnTool(BaseEvent* baseEvent);
+	static void OnMoveTool(BaseEvent* baseEvent);
+
+	void RemoveToolListeners() override
+	{
+		EventManager::Instance()->RemoveListener<OnClickEvent>(OnMoveTool);
+		EventManager::Instance()->RemoveListener<OnMouseOverEvent>(OnMoveTool);
+	}
+
+	void AddToolListeners() override
+	{
+		EventManager::Instance()->AddListener<OnClickEvent>(OnMoveTool);
+		EventManager::Instance()->AddListener<OnMouseOverEvent>(OnMoveTool);
+	}
 };
 
-class ScaleTool
+class RotateTool : public ITool
+{
+private:
+	static bool isRotating;
+
+public:
+	static void OnRotateTool(BaseEvent* baseEvent);
+
+	void RemoveToolListeners() override
+	{
+		EventManager::Instance()->RemoveListener<OnClickEvent>(OnRotateTool);
+		EventManager::Instance()->RemoveListener<OnMouseOverEvent>(OnRotateTool);
+	}
+
+	void AddToolListeners() override
+	{
+		EventManager::Instance()->AddListener<OnClickEvent>(OnRotateTool);
+		EventManager::Instance()->AddListener<OnMouseOverEvent>(OnRotateTool);
+	}
+};
+
+class ScaleTool : public ITool
 {
 public:
-	static void OnTool(BaseEvent* baseEvent);
+	static void OnScaleTool(BaseEvent* baseEvent);
+	static Vector2 previousMouse;
+
+	void RemoveToolListeners() override
+	{
+		EventManager::Instance()->RemoveListener<OnClickEvent>(OnScaleTool);
+	}
+
+	void AddToolListeners() override
+	{
+		EventManager::Instance()->AddListener<OnClickEvent>(OnScaleTool);
+	}
 };
 
 

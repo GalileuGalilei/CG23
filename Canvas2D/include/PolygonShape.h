@@ -17,10 +17,11 @@ class PolygonShape : IRenderable
 {
 protected:
 	std::vector<float> points[2]; // [0] = x; [1] = y;
-	Vector2 center = Vector2(0,0);
+	Vector2 center;
 	Color color = Colors::black;
 	int tam = 0;
 	bool isFilled = false;
+	bool isCenterCalculated = false;
 
 public:
 

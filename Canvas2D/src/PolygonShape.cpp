@@ -86,11 +86,17 @@ void PolygonShape::Translate(Vector2 vector)
 		points[0][i] += vector.x;
 		points[1][i] += vector.y;
 	}
+
+	isCenterCalculated = false;
 }
 
 void PolygonShape::SetPosition(Vector2 pos)
 {
-	Vector2 t = pos - Vector2(points[0][0], points[1][0]);
+	if (!isCenterCalculated)
+	{
+		CalculateCenter();
+	}
+	Vector2 t = pos - center;
 	this->Translate(t);
 }
 
@@ -226,6 +232,12 @@ void PolygonShape::CalculateCenter()
 void PolygonShape::Rotate(float angle)
 {
 	float x, y;
+
+	if (!isCenterCalculated)
+	{
+		CalculateCenter();
+	}
+
 	for (int i = 0; i < tam; i++)
 	{
 		x = points[0][i] - center.x;

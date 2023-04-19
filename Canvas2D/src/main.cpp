@@ -42,14 +42,14 @@ void keyboardUp(int key)
 //funcao para tratamento de mouse: cliques, movimentos e arrastos
 void mouse(int button, int state, int wheel, int direction, int x, int y)
 {
-    printf("\nMouse: %d, %d, %d, %d, %d, %d", button, state, wheel, direction, x, y);
+  //  printf("\nMouse: %d, %d, %d, %d, %d, %d", button, state, wheel, direction, x, y);
 
     if (state == 1)
     {
         EventManager::Instance()->InvokeEvent<OnClickEvent>((BaseEvent*) new OnClickEvent(button, state, x, y));
     }
 
-    EventManager::Instance()->InvokeEvent<OnMouseOverEvent>((BaseEvent*) new OnMouseOverEvent(x, y));
+    EventManager::Instance()->InvokeEvent<OnMouseOverEvent>((BaseEvent*) new OnMouseOverEvent(x, y, direction));
 }
 
 int main(void)
