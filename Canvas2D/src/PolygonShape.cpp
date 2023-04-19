@@ -249,10 +249,23 @@ void PolygonShape::Rotate(float angle)
 
 void PolygonShape::Scale(Vector2 scale)
 {
+	if (!isCenterCalculated)
+	{
+		CalculateCenter();
+	}
+
+
 	for (int i = 0; i < tam; i++)
 	{
-		points[0][i] = points[0][i] * scale.x;
-		points[1][i] = points[1][i] * scale.y;
+		Vector2 p = Vector2(points[0][i], points[1][i]);
+		Vector2 t = p - center;
+
+		t.normalize();
+		t.x *= scale.x;
+		t.y *= scale.y;
+
+		points[0][i] = points[0][i] + t.x;
+		points[1][i] = points[1][i] + t.y;
 	}
 }
 

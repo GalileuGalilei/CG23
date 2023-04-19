@@ -75,19 +75,35 @@ void RotateTool::OnRotateTool(BaseEvent* baseEvent)
 	}
 }
 
-Vector2 ScaleTool::previousMouse = Vector2(-1, -1);
+bool ScaleTool::isScaling = false;
 
 void ScaleTool::OnScaleTool(BaseEvent* baseEvent)
 {
-	OnClickEvent* click = (OnClickEvent*)baseEvent;
-	Vector2 currentMouse = Vector2(click->x, click->y);
-	Vector2 scale = currentMouse - previousMouse;
-	previousMouse = currentMouse;
-
-	if (previousMouse.x < 0)
+	if (selectedPolygon == NULL)
 	{
 		return;
 	}
 
-	selectedPolygon->Scale(scale);
+	if (baseEvent->GetType() == ClickEvent)
+	{
+		OnClickEvent* click = (OnClickEvent*)baseEvent;
+		if (!isScaling && click->state == 1)
+		{
+			isScaling = true;
+		}
+		else
+		{
+			isScaling = false;
+			selectedPolygon = NULL;
+		}
+	}
+	else if (baseEvent->GetType() == MouseOverEvent && isScaling)
+	{
+		OnMouseOverEvent* mouseOver = (OnMouseOverEvent*)baseEvent;
+		selectedPolygon->Scale(mouseOver->translation);
+	}
+
+
+
+
 }

@@ -97,18 +97,22 @@ public:
 
 class ScaleTool : public ITool
 {
+private:
+	static bool isScaling;
+
 public:
 	static void OnScaleTool(BaseEvent* baseEvent);
-	static Vector2 previousMouse;
 
 	void RemoveToolListeners() override
 	{
 		EventManager::Instance()->RemoveListener<OnClickEvent>(OnScaleTool);
+		EventManager::Instance()->RemoveListener<OnMouseOverEvent>(OnScaleTool);
 	}
 
 	void AddToolListeners() override
 	{
 		EventManager::Instance()->AddListener<OnClickEvent>(OnScaleTool);
+		EventManager::Instance()->AddListener<OnMouseOverEvent>(OnScaleTool);
 	}
 };
 

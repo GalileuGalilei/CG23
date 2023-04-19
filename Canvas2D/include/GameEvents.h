@@ -84,6 +84,8 @@ public:
 		this->wheel = wheel;
 
 		translation = Vector2(x - oldX, y - oldY);
+		oldX = x;
+		oldY = y;
 	}
 };
 
