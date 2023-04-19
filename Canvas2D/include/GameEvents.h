@@ -4,6 +4,26 @@
 #include "EventManager.h"
 #include "Vector2.h"
 
+enum GameLayer 
+{
+	UI = 0,
+	Default,
+	LayersCount
+};
+
+class ILayer
+{
+protected:
+	ILayer() {};
+	
+public:
+	
+	virtual GameLayer GetLayer()
+	{
+		return GameLayer::Default;
+	}
+};
+
 class OnRenderEvent : BaseEvent
 {
 public:
@@ -18,24 +38,34 @@ public:
 
 };
 
-class IRenderable
+class IRenderable : ILayer
 {
 public:
 	static void RenderAll(BaseEvent* baseEvent);
 
 private:
-	static std::list<IRenderable*> renderList;
+	static std::list<IRenderable*> renderList[GameLayer::LayersCount];
 	virtual void OnRender(OnRenderEvent* args) = 0;
 
 protected:
 	IRenderable()
 	{
-		renderList.push_back(this);
+		renderList[GetLayer()].push_back(this);
 	}
 
 	~IRenderable()
 	{
-		renderList.remove(this);
+		renderList[GetLayer()].remove(this);
+	}
+
+	void RemoveRenderListener()
+	{
+		renderList[GetLayer()].remove(this);
+	}
+
+	void AddRenderListener()
+	{
+		renderList[GetLayer()].push_back(this);
 	}
 };
 

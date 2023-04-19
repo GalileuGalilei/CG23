@@ -13,6 +13,8 @@ public:
 	EditablePolygon(std::vector<Vector2> points) : ConcavePolygon(points) {}
 
 	EditablePolygon() : ConcavePolygon(std::vector<Vector2>()) {}
+	
+	static Color selectedColor;
 
 	void AddPoint(Vector2 point);
 	void RemoveLastPoint();
@@ -21,29 +23,40 @@ public:
 
 private:
 
-	void OnRender(OnRenderEvent* args) override
+	bool isSelected = false;
+
+	void PushToFrontLayer()
 	{
+		RemoveRenderListener();
+		AddRenderListener();
+	}
+
+	void OnRender(OnRenderEvent* args) override
+	{				
 		CV::color(color.r, color.g, color.b);
 
-		if (isFilled)
-		{
-			RenderTriangles();
-			return;
-		}
-
+		RenderTriangles();
 		float* x = points[0].data();
 		float* y = points[1].data();
 
-		CV::polygon(x, y, tam);
+		if (isSelected)
+		{
+			CV::color(selectedColor.r, selectedColor.g, selectedColor.b);
+			CV::polygon(x, y, tam);
+			return;
+		}
 	}
 
 	void OnClick(OnClickEvent* args) override
 	{
 		if (!PointToPolygon(Vector2(args->x, args->y), NULL))
 		{
+			isSelected = false;
 			return;
 		}
 
+		isSelected = true;
+		PushToFrontLayer();
 		EventManager::Instance()->InvokeEvent<OnToolEvent>((BaseEvent*) new OnToolEvent(this));
 	}
 

@@ -13,14 +13,17 @@ EventType OnRenderEvent::GetStaticType()
 	return EventType::RenderEvent;
 }
 
-std::list<IRenderable*> IRenderable::renderList;
+std::list<IRenderable*> IRenderable::renderList[GameLayer::LayersCount];
 void IRenderable::RenderAll(BaseEvent* baseEvent)
 {
 	OnRenderEvent* args = (OnRenderEvent*)baseEvent;
 
-	for (auto i : IRenderable::renderList)
+	for (int i = 0; i < GameLayer::LayersCount; i++)
 	{
-		i->OnRender(args);
+		for (auto j : IRenderable::renderList[i])
+		{
+			j->OnRender(args);
+		}
 	}
 }
 

@@ -13,15 +13,17 @@
 /// <summary>
 /// classe que define uma base para polygonos quaisquer
 /// </summary>
-class PolygonShape : IRenderable
+class PolygonShape : public IRenderable
 {
 protected:
 	std::vector<float> points[2]; // [0] = x; [1] = y;
 	Vector2 center;
 	Color color = Colors::black;
 	int tam = 0;
-	bool isFilled = false;
+	bool isFilled = true;
 	bool isCenterCalculated = false;
+
+	
 
 public:
 

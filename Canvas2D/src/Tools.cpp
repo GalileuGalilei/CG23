@@ -79,6 +79,8 @@ bool ScaleTool::isScaling = false;
 
 void ScaleTool::OnScaleTool(BaseEvent* baseEvent)
 {
+	const float scaleFactor = 100;
+
 	if (selectedPolygon == NULL)
 	{
 		return;
@@ -100,10 +102,12 @@ void ScaleTool::OnScaleTool(BaseEvent* baseEvent)
 	else if (baseEvent->GetType() == MouseOverEvent && isScaling)
 	{
 		OnMouseOverEvent* mouseOver = (OnMouseOverEvent*)baseEvent;
-		selectedPolygon->Scale(mouseOver->translation);
+		Vector2 scale = mouseOver->translation;
+
+		scale = Vector2(-scale.x / scaleFactor, -scale.y / scaleFactor);
+		scale.x = scale.x < 0 ? 1 - scale.x : 1 / (1 + scale.x);
+		scale.y = scale.y < 0 ? 1 - scale.y : 1 / (1 + scale.y);
+		
+		selectedPolygon->Scale(scale);
 	}
-
-
-
-
 }

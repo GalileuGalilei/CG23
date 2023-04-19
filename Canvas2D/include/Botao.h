@@ -4,7 +4,7 @@
 #include "gl_canvas2d.h"
 #include "PolygonShape.h"
 #include <functional>
-class Button : IRenderable, IClickable
+class Button : IRenderable, IClickable 
 {
 private:
 	std::function<void()> callback;
@@ -43,9 +43,7 @@ public:
 	  {
 		  return;
 	  }
-
-	  //polygon->SetColor(color.r * mouseOverColorChange, color.g * mouseOverColorChange, color.b * mouseOverColorChange);
-	  printf("botao!\n");
+	  
 	  callback();
   }
 
@@ -57,6 +55,11 @@ public:
 	  }
   }
 
+  GameLayer GetLayer() override
+  {
+	  return GameLayer::UI;
+  }
+  
 private:
 	bool CheckBounds(int x, int y)
 	{

@@ -1,5 +1,7 @@
 #include "EditablePolygon.h"
 
+Color EditablePolygon::selectedColor = Color(0.6, 0.1, 0.6);
+
 void EditablePolygon::AddPoint(Vector2 point)
 {
 	if (!IsValiblePoint(point))
@@ -41,3 +43,7 @@ void EditablePolygon::Erase()
 	tam = 0;
 }
 
+void DrawBorder(Color color)
+{
+	
+}

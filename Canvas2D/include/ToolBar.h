@@ -11,9 +11,12 @@ class ToolBar : IRenderable
 {
 private :
 	std::list<Button*> buttonList;
-	Vector2 position, size;
-	Vector2 buttonSize;
 	DrawableDisplay* display;
+
+	Vector2 position;
+	Vector2 size;
+
+	Vector2 buttonSize;
 	const int offset;
 
 	MoveTool* moveTool;
@@ -53,6 +56,11 @@ private:
 		Color c = Colors::yellow;
 		CV::color(c.r, c.g, c.b);
 		CV::rectFill(position.x, position.y, size.x + offset, size.y);
+	}
+
+	GameLayer GetLayer() override
+	{
+		return GameLayer::UI;
 	}
 
 	void AddButton(std::function<void()> callback, Color color)
