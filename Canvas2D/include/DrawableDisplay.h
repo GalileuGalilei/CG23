@@ -26,6 +26,7 @@ public:
 	{
 		this->position = position;
 		this->size = size;
+		LoadDisplay();
 		editablePolygon = new EditablePolygon();
 		tempPolygon = new EditablePolygon();
 	}
@@ -38,7 +39,8 @@ public:
 	//escreva uma função que salve todos os poligonos da lista 	std::list<EditablePolygon*> drawnPolygons em um arquivo
 	void SaveDisplay()
 	{
-		FILE* f = fopen(savePath, "wb");
+		FILE* f;
+		fopen_s(&f, savePath, "wb");
 		
 		for (auto polygon : drawnPolygons)
 		{
@@ -52,7 +54,8 @@ public:
 
 	void LoadDisplay()
 	{
-		FILE* f = fopen(savePath, "rb");
+		FILE* f;
+		fopen_s(&f, savePath, "rb");
 		
 		if (f == NULL)
 		{

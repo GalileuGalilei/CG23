@@ -119,5 +119,13 @@ private:
 				ITool::DisableAllTools();
 				display->SetState(true);
 			}, Colors::orange, "Draw");
+
+		AddButton([this]()
+			{
+				ITool::DisableAllTools();
+				display->SaveDisplay();
+			}, Colors::orange, "Save");
+
+
 	}
 };

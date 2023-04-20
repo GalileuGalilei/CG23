@@ -136,5 +136,8 @@ public:
 	}
 };
 
+class DeleteTool : public ITool
+{
+public:
 
-
+};
