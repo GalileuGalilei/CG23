@@ -3,6 +3,7 @@
 // Autor: Cesar Tadeu Pozzer
 //        04/2021
 // *********************************************************************/
+#define _CRT_SECURE_NO_WARNINGS
 #include <GL/glut.h>
 #include <GL/freeglut_ext.h>
 #include <math.h>

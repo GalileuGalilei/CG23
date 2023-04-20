@@ -1,5 +1,6 @@
 #ifndef __CANVAS_2D__H__
 #define __CANVAS_2D__H__
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

@@ -6,6 +6,36 @@
 #include "ConcavePolygon.h"
 #include "Tools.h"
 
+/// <summary>
+/// classe usada para carregar e descarregar poligonos de um arquivo
+/// </summary>
+struct PolygonData
+{
+	int tam;
+	Color color;
+	bool isFilled;
+	bool isCenterCalculated;
+	Vector2 center;
+
+	PolygonData()
+	{
+		tam = 0;
+		isFilled = true;
+		isCenterCalculated = false;
+		center = Vector2(0, 0);
+		color = Colors::black;
+	}
+
+	PolygonData(int tam, bool isFilled, bool isCenterCalculated, Vector2 center, Color color)
+	{
+		this->tam = tam;
+		this->color = color;
+		this->isFilled = isFilled;
+		this->isCenterCalculated = isCenterCalculated;
+		this->center = center;
+	}
+};
+
 class EditablePolygon : public ConcavePolygon, public IClickable
 {
 public:
@@ -16,6 +46,8 @@ public:
 	
 	static Color selectedColor;
 
+	PolygonData GetData();
+	void LoadData(PolygonData data, std::vector<float> x, std::vector<float> y);
 	bool AddPoint(Vector2 point);
 	void RemoveLastPoint();
 	void SetPointPosition(Vector2 pos, int index);

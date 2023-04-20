@@ -15,6 +15,8 @@ private:
 	Vector2 size;
 	EditablePolygon* editablePolygon;
 	EditablePolygon* tempPolygon;
+	std::list<EditablePolygon*> drawnPolygons;
+	const char* savePath = "figuras.gr";
 
 	bool IsInsertPolygonEnable = true;
 
@@ -31,6 +33,54 @@ public:
 	void SetState(bool state)
 	{
 		IsInsertPolygonEnable = state;
+	}
+
+	//escreva uma função que salve todos os poligonos da lista 	std::list<EditablePolygon*> drawnPolygons em um arquivo
+	void SaveDisplay()
+	{
+		FILE* f = fopen(savePath, "wb");
+		
+		for (auto polygon : drawnPolygons)
+		{
+			PolygonData data = polygon->GetData();
+			fwrite(&data, sizeof(PolygonData), 1, f);
+			fwrite(polygon->points[0].data(), sizeof(float), data.tam, f);
+			fwrite(polygon->points[1].data(), sizeof(float), data.tam, f);
+		}
+		fclose(f);
+	}
+
+	void LoadDisplay()
+	{
+		FILE* f = fopen(savePath, "rb");
+		
+		if (f == NULL)
+		{
+			return;
+		}
+
+		while (!feof(f))
+		{
+			PolygonData data;
+			fread(&data, sizeof(PolygonData), 1, f);
+
+			if (data.tam < 1)
+			{
+				break;
+			}
+
+			std::vector<float> x(data.tam);
+			std::vector<float> y(data.tam);
+
+			fread(x.data(), sizeof(float), data.tam, f);
+			fread(y.data(), sizeof(float), data.tam, f);
+
+			EditablePolygon* polygon = new EditablePolygon();
+			polygon->LoadData(data, x, y);
+			drawnPolygons.push_back(polygon);
+		}
+		
+		fclose(f);
 	}
 
 	void OnClick(OnClickEvent* args) override
@@ -90,6 +140,7 @@ private:
 		}
 		else
 		{
+			drawnPolygons.push_back(editablePolygon);
 			editablePolygon = new EditablePolygon();
 			tempPolygon->Erase();
 		}

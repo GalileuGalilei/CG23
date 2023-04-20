@@ -23,8 +23,6 @@ protected:
 	bool isFilled = true;
 	bool isCenterCalculated = false;
 
-	
-
 public:
 
 	void Translate(Vector2 vector);
