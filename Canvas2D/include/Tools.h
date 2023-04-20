@@ -1,8 +1,8 @@
 #pragma once
 #include "EventManager.h"
-#include "GameEvents.h"
-#include "PolygonShape.h"
 #include "ColorDisplay.h"
+#include "PolygonShape.h"
+//gameevent -> polygonshape -> gameevent(tool)
 
 class OnToolEvent : public BaseEvent
 {
@@ -136,8 +136,19 @@ public:
 	}
 };
 
+
 class DeleteTool : public ITool
 {
 public:
-
+	static void OnDeleteTool(BaseEvent* baseEvent);
+	
+	void RemoveToolListeners() override
+	{
+		EventManager::Instance()->RemoveListener<OnKeyEvent>(OnDeleteTool);
+	}
+	
+	void AddToolListeners() override
+	{
+		EventManager::Instance()->AddListener<OnKeyEvent>(OnDeleteTool);
+	}
 };

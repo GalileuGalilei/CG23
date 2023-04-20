@@ -29,14 +29,16 @@ void render()
 //funcao chamada toda vez que uma tecla for pressionada
 void keyboard(int key)
 {
-   printf("\nClicou Tecla: %d" , key);
+   //printf("\nClicou Tecla: %d" , key);
+	EventManager::Instance()->InvokeEvent<OnKeyEvent>((BaseEvent*) new OnKeyEvent(key, 0));
 }
 
 
 //funcao chamada toda vez que uma tecla for liberada
 void keyboardUp(int key)
 {
-   printf("\nLiberou Tecla: %d" , key);
+   //printf("\nLiberou Tecla: %d" , key);
+    EventManager::Instance()->InvokeEvent<OnKeyEvent>((BaseEvent*) new OnKeyEvent(key, 1));
 }
 
 

@@ -56,3 +56,7 @@ void IClickable::MouseOverAll(BaseEvent* baseEvent)
 	}
 }
 
+EventType OnKeyEvent::GetStaticType()
+{
+	return EventType::KeyEvent;
+}

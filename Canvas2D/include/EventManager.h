@@ -9,7 +9,9 @@ enum EventType
 	None = 0,
 	ClickEvent,
 	MouseOverEvent,
+	KeyEvent,
 	RenderEvent,
+	PolygonDeleteEvent,
 	ToolEvent,
 	Count
 };

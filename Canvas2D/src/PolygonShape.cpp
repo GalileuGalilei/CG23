@@ -269,4 +269,3 @@ void PolygonShape::Scale(Vector2 scale)
 		points[1][i] = y * scale.y + center.y;
 	}
 }
-

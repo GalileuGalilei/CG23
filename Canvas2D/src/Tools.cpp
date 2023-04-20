@@ -1,4 +1,5 @@
 #include "Tools.h"
+#include "DrawableDisplay.h"
 
 std::list<ITool*> ITool::toolList;
 PolygonShape* ITool::selectedPolygon = NULL; 
@@ -121,5 +122,21 @@ void ScaleTool::OnScaleTool(BaseEvent* baseEvent)
 		scale.y = scale.y < 0 ? 1 - scale.y : 1 / (1 + scale.y);
 		
 		selectedPolygon->Scale(scale);
+	}
+}
+
+void DeleteTool::OnDeleteTool(BaseEvent* baseEvent)
+{
+	if (selectedPolygon == NULL)
+	{
+		return;
+	}
+
+	OnKeyEvent* args = (OnKeyEvent*)baseEvent;
+	
+	if (args->key == 127 && args->state == 0)
+	{
+		DrawableDisplay::DeletePolygon(selectedPolygon);
+		selectedPolygon = NULL;
 	}
 }

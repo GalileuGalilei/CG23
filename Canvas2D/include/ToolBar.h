@@ -25,6 +25,7 @@ private :
 	RotateTool* rotateTool;
 	ScaleTool* scaleTool;
 	FillTool* fillTool;
+	DeleteTool* deleteTool;
 
 public :
 	ToolBar(DrawableDisplay* display, Vector2 position, Vector2 size, int buttonOffset) : offset(buttonOffset)
@@ -41,6 +42,9 @@ public :
 		rotateTool = new RotateTool();
 		scaleTool = new ScaleTool();
 		fillTool = new FillTool();
+		deleteTool = new DeleteTool();
+		
+		deleteTool->AddToolListeners();
 		SetColorDisplay();
 	}
 

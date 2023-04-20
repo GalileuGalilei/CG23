@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DRAWABLE_DISPLAY
+#define DRAWABLE_DISPLAY
+
 #include "Vector2.h"
 #include "EditablePolygon.h"
 #include "gl_canvas2d.h"
@@ -15,7 +17,7 @@ private:
 	Vector2 size;
 	EditablePolygon* editablePolygon;
 	EditablePolygon* tempPolygon;
-	std::list<EditablePolygon*> drawnPolygons;
+	static std::list<EditablePolygon*> drawnPolygons;
 	const char* savePath = "figuras.gr";
 
 	bool IsInsertPolygonEnable = true;
@@ -31,6 +33,21 @@ public:
 		tempPolygon = new EditablePolygon();
 	}
 
+	static void DeletePolygon(PolygonShape* polygon)
+	{
+		EditablePolygon* p = (EditablePolygon*) polygon;
+
+		for (auto i : drawnPolygons)
+		{
+			if (i == p)
+			{
+				drawnPolygons.remove(i);
+				delete(i);
+				break;
+			}
+		}
+	}
+	
 	void SetState(bool state)
 	{
 		IsInsertPolygonEnable = state;
@@ -149,3 +166,5 @@ private:
 		}
 	}
 };
+
+#endif // !DRAWABLE_DISPLAY

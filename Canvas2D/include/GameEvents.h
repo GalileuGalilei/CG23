@@ -127,12 +127,41 @@ public:
 protected:
 	IClickable()
 	{
-		clickList.push_back(this);
+		AddClickListener();
 	}
 
 	~IClickable()
 	{
+		RemoveClickListener();
+	}
+
+	void RemoveClickListener()
+	{
 		clickList.remove(this);
+	}
+
+	void AddClickListener()
+	{
+		clickList.push_back(this);
+	}
+};
+
+class OnKeyEvent : BaseEvent
+{
+public:
+	static EventType GetStaticType();
+
+	EventType GetType() const override
+	{
+		return GetStaticType();
+	}
+
+	int key, state;
+
+	OnKeyEvent(int key, int state)
+	{
+		this->key = key;
+		this->state = state;
 	}
 };
 
