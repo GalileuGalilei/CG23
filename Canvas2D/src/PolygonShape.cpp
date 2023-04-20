@@ -17,9 +17,10 @@ bool OnLine(Vector2 p1, Vector2 p2, Vector2 p3)
 	return false;
 }
 
-int Orientation(Vector2 p1, Vector2 p2, Vector2 p3)
+int PolygonShape::Orientation(Vector2 p1, Vector2 p2, Vector2 p3)
 {
 	int val = (p2.y - p1.y) * (p3.x - p2.x) - (p2.x - p1.x) * (p3.y - p2.y);
+
 	if (val == 0)
 	{
 		return 0;  // colinear
@@ -28,25 +29,27 @@ int Orientation(Vector2 p1, Vector2 p2, Vector2 p3)
 	return (val > 0) ? 1 : -1; // sentido horário ou anti-horário
 }
 
-bool IsLineIntersecting(Vector2 p1, Vector2 q1, Vector2 p2, Vector2 q2)
+bool PolygonShape::IsLineIntersecting(Vector2 p1, Vector2 p2, Vector2 q1, Vector2 q2)
 {
-	int o1 = Orientation(p1, q1, p2);
-	int o2 = Orientation(p1, q1, q2);
-	int o3 = Orientation(p2, q2, p1);
-	int o4 = Orientation(p2, q2, q1);
+	int o1 = Orientation(p1, p2, q1);
+	int o2 = Orientation(p1, p2, q2);
+	int o3 = Orientation(q1, q2, p1);
+	int o4 = Orientation(q1, q2, p2);
 
 	if (o1 != o2 && o3 != o4)
 	{
 		return true;
 	}
 
-	if (o1 == 0 && OnLine(p1, p2, q1)) return true;
-	if (o2 == 0 && OnLine(p1, q2, q1)) return true;
-	if (o3 == 0 && OnLine(p2, p1, q2)) return true;
-	if (o4 == 0 && OnLine(p2, q1, q2)) return true;
+	if (o1 == 0 && OnLine(p1, q1, p2)) return true;
+	if (o2 == 0 && OnLine(p1, q2, p2)) return true;
+	if (o3 == 0 && OnLine(q1, p1, q2)) return true;
+	if (o4 == 0 && OnLine(q1, p2, q2)) return true;
 
 	return false;
 }
+
+
 
 //funções da classe
 
@@ -115,7 +118,7 @@ void PolygonShape::SetColor(float r, float g, float b)
 	this->color = Color(r, g, b);
 }
 
-int PolygonShape::LineIntersectingCount(Vector2 p1, Vector2 q1, std::vector<bool>* ignoreIndex)
+int PolygonShape::LineIntersectingCount(Vector2 p1, Vector2 p2, std::vector<bool>* ignoreIndex)
 {
 	if (tam < 2)
 	{
@@ -139,12 +142,13 @@ int PolygonShape::LineIntersectingCount(Vector2 p1, Vector2 q1, std::vector<bool
 				next = (next + 1) % tam;
 			}
 		}
-		Vector2 p2 = Vector2(points[0][i], points[1][i]);
+		Vector2 q1 = Vector2(points[0][i], points[1][i]);
 		Vector2 q2 = Vector2(points[0][next], points[1][next]);
-		if (IsLineIntersecting(p1, q1, p2, q2))
+		if (IsLineIntersecting(p1, p2, q1, q2))
 		{
 			count++;
 		}
+
 		if (i > next)
 		{
 			break;
@@ -199,7 +203,7 @@ bool PolygonShape::LineToPolygon(Vector2 p1, Vector2 p2, std::vector<bool>* igno
 
 		if (IsLineIntersecting(p1, p2, q1, q2))
 		{
-			if (Orientation(p1, p2, q1) == 0 && Orientation(p1, p2, q2) == 0)
+			if (Orientation(p1, p2, q1) == 0 || Orientation(p1, p2, q2) == 0)
 			{
 				return true;
 			}

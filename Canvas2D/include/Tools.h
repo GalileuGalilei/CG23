@@ -2,6 +2,7 @@
 #include "EventManager.h"
 #include "GameEvents.h"
 #include "PolygonShape.h"
+#include "ColorDisplay.h"
 
 class OnToolEvent : public BaseEvent
 {
@@ -51,6 +52,25 @@ protected:
 	static PolygonShape* selectedPolygon;
 	virtual void RemoveToolListeners() = 0;
 	virtual void AddToolListeners() = 0;
+};
+
+
+class FillTool : public ITool
+{
+public:
+	static Color selectedColor;
+	static void OnFillTool(BaseEvent* baseEvent);
+	ColorDisplay* display;
+
+	void RemoveToolListeners() override
+	{
+		EventManager::Instance()->RemoveListener<OnClickEvent>(OnFillTool);
+	}
+
+	void AddToolListeners() override
+	{
+		EventManager::Instance()->AddListener<OnClickEvent>(OnFillTool);
+	}
 };
 
 class MoveTool : public ITool

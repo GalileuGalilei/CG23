@@ -6,22 +6,10 @@
 
 enum GameLayer 
 {
-	UI = 0,
+	UI2 = 0,
+	UI,
 	Default,
 	LayersCount
-};
-
-class ILayer
-{
-protected:
-	ILayer() {};
-	
-public:
-	
-	virtual GameLayer GetLayer()
-	{
-		return GameLayer::Default;
-	}
 };
 
 class OnRenderEvent : BaseEvent
@@ -38,34 +26,40 @@ public:
 
 };
 
-class IRenderable : ILayer
+class IRenderable
 {
 public:
 	static void RenderAll(BaseEvent* baseEvent);
 
+	virtual GameLayer GetLayer()
+	{
+		return GameLayer::Default;
+	}
+
 private:
-	static std::list<IRenderable*> renderList[GameLayer::LayersCount];
+	static std::list<IRenderable*> renderList;
 	virtual void OnRender(OnRenderEvent* args) = 0;
 
 protected:
+
 	IRenderable()
 	{
-		renderList[GetLayer()].push_back(this);
+		AddRenderListener();
 	}
 
 	~IRenderable()
 	{
-		renderList[GetLayer()].remove(this);
+		RemoveRenderListener();
 	}
 
 	void RemoveRenderListener()
 	{
-		renderList[GetLayer()].remove(this);
+		renderList.remove(this);
 	}
 
 	void AddRenderListener()
 	{
-		renderList[GetLayer()].push_back(this);
+		renderList.push_back(this);
 	}
 };
 

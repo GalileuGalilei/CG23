@@ -16,7 +16,6 @@ protected:
 	bool isMouseOver = false;
 	Color color;
 	Vector2 position, size;
-	PolygonShape* polygon;
 
 public:
   Button(Vector2 position, Vector2 size, Color color, const char label[], std::function<void()> callback)
@@ -26,13 +25,13 @@ public:
      this->position = position;
 	 this->size = size;
      this->color = color;
-     this->polygon = new PolygonShape(position, size);
-     this->polygon->SetColor(color);
 	 this->callback = callback;
   }
 
   void OnRender(OnRenderEvent* args) override
   {
+	  CV::color(color.r, color.g, color.b);
+	  CV::rectFill(position, position + size);
       CV::color(0, 0, 0);
       CV::text(position.x+5, position.y + size.y / 2, label);
   }

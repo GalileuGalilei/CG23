@@ -8,6 +8,18 @@ EventType OnToolEvent::GetStaticType()
 	return EventType::ToolEvent;
 }
 
+
+void FillTool::OnFillTool(BaseEvent* baseEvent)
+{
+	if (selectedPolygon == NULL)
+	{
+		return;
+	}
+	
+	selectedPolygon->Fill();
+	selectedPolygon->SetColor(ColorDisplay::selectedColor);
+}
+
 bool MoveTool::isMoving = false;
 
 void MoveTool::OnMoveTool(BaseEvent* baseEvent)

@@ -2,6 +2,7 @@
 #include "gl_canvas2d.h"
 #include "GameEvents.h"
 #include "Tools.h"
+#include "ColorDisplay.h"
 #include "Botao.h"
 #include "DrawableDisplay.h"
 #include <functional>
@@ -12,6 +13,7 @@ class ToolBar : IRenderable
 private :
 	std::list<Button*> buttonList;
 	DrawableDisplay* display;
+	ColorDisplay* colorDisplay;
 
 	Vector2 position;
 	Vector2 size;
@@ -22,14 +24,15 @@ private :
 	MoveTool* moveTool;
 	RotateTool* rotateTool;
 	ScaleTool* scaleTool;
+	FillTool* fillTool;
 
 public :
-	ToolBar(DrawableDisplay* display, Vector2 postion, Vector2 size, int buttonOffset) : offset(buttonOffset)
+	ToolBar(DrawableDisplay* display, Vector2 position, Vector2 size, int buttonOffset) : offset(buttonOffset)
 	{
 		this->position = position;
 		this->size = size;
 		this->display = display;
-		buttonSize = Vector2(size.x - offset, size.x - offset);
+		buttonSize = Vector2(size.x - offset, (size.x / 2) - offset);
 		SetToolButtons();
 
 		EventManager::Instance()->AddListener<OnToolEvent>(ITool::OnTool);
@@ -37,6 +40,8 @@ public :
 		moveTool = new MoveTool();
 		rotateTool = new RotateTool();
 		scaleTool = new ScaleTool();
+		fillTool = new FillTool();
+		SetColorDisplay();
 	}
 
 	~ToolBar()
@@ -63,12 +68,20 @@ private:
 		return GameLayer::UI;
 	}
 
-	void AddButton(std::function<void()> callback, Color color)
+	void AddButton(std::function<void()> callback, Color color, const char label[])
 	{
-		int y = size.x * buttonList.size() + offset;
+		int y = (buttonSize.y + offset) * buttonList.size() + offset;
 		int x = position.x + offset;
-		Button* b = new Button(Vector2(x, y), buttonSize, color, "*", callback);
+		Button* b = new Button(Vector2(x, y), buttonSize, color, label, callback);
 		buttonList.push_back(b);
+	}
+
+	void SetColorDisplay()
+	{
+		Vector2 pos;
+		pos.x = offset;
+		pos.y = (buttonSize.y + offset) * buttonList.size() + offset;
+		colorDisplay = new ColorDisplay(pos, Vector2(buttonSize.x, size.y - pos.y - offset));
 	}
 
 	void SetToolButtons()
@@ -78,27 +91,33 @@ private:
 				ITool::DisableAllTools();
 				moveTool->AddToolListeners();
 				display->SetState(false);
-			}, Colors::green);
+			}, Colors::orange, "Move");
 
 		AddButton([this]() 
 			{
 				ITool::DisableAllTools();
 				rotateTool->AddToolListeners();
 				display->SetState(false);
-			}, Colors::red);
+			}, Colors::orange, "Rotate");
 
 		AddButton([this]() 
 			{
 				ITool::DisableAllTools();
 				scaleTool->AddToolListeners();
 				display->SetState(false);
-			}, Colors::orange);
+			}, Colors::orange, "Scale");
+
+		AddButton([this]()
+			{
+				ITool::DisableAllTools();
+				fillTool->AddToolListeners();
+				display->SetState(false);
+			}, Colors::orange, "Fill");
 
 		AddButton([this]()
 			{
 				ITool::DisableAllTools();
 				display->SetState(true);
-			}, Colors::blue);
+			}, Colors::orange, "Draw");
 	}
 };
-

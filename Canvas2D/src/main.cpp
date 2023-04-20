@@ -59,8 +59,8 @@ int main(void)
     EventManager::Instance()->AddListener<OnRenderEvent>(IRenderable::RenderAll);
     EventManager::Instance()->AddListener<OnClickEvent>(IClickable::ClickAll);
     EventManager::Instance()->AddListener<OnMouseOverEvent>(IClickable::MouseOverAll);
-    DrawableDisplay display = DrawableDisplay(Vector2(25, 25), Vector2(450, 450));
-    ToolBar toolBar = ToolBar(&display, Vector2(0, 0), Vector2(40, screenHeight), 5);
+    DrawableDisplay display = DrawableDisplay(Vector2(75, 40), Vector2(450, 450));
+    ToolBar toolBar = ToolBar(&display, Vector2(0, 0), Vector2(70, screenHeight), 5);
 
     CV::init(&screenWidth, &screenHeight, "Canvas 2D");
     CV::run();

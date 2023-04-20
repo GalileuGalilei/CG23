@@ -2,18 +2,25 @@
 
 Color EditablePolygon::selectedColor = Color(0.6, 0.1, 0.6);
 
-void EditablePolygon::AddPoint(Vector2 point)
+
+bool EditablePolygon::AddPoint(Vector2 point)
 {
 	if (!IsValiblePoint(point))
 	{
 		printf("ERRO: ponto inválido");
-		return;
+		return false;
 	}
 
 	points[0].push_back(point.x);
 	points[1].push_back(point.y);
 	tam++;
-	Triangulate();
+	if (!Triangulate())
+	{
+		RemoveLastPoint();
+		return false;
+	}
+
+	return true;
 }
 
 void EditablePolygon::RemoveLastPoint()

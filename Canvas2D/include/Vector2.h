@@ -25,6 +25,11 @@ public:
        y = _y;
    }
 
+   int dot(const Vector2& v)
+   {
+	   return( x * v.x + y * v.y );
+   }
+
    void normalize()
    {
        float norm = (float)sqrt(x*x + y*y);
@@ -56,6 +61,11 @@ public:
    {
        Vector2 aux(x * s, y * s);
        return(aux);
+   }
+
+   bool operator == (const Vector2& v)
+   {
+	   return (x == v.x && y == v.y);
    }
 
    //Adicionem os demais overloads de operadores aqui.

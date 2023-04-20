@@ -14,6 +14,7 @@ private:
 	Vector2 position;
 	Vector2 size;
 	EditablePolygon* editablePolygon;
+	EditablePolygon* tempPolygon;
 
 	bool IsInsertPolygonEnable = true;
 
@@ -24,6 +25,7 @@ public:
 		this->position = position;
 		this->size = size;
 		editablePolygon = new EditablePolygon();
+		tempPolygon = new EditablePolygon();
 	}
 
 	void SetState(bool state)
@@ -43,12 +45,12 @@ public:
 
 	void OnMouseOver(OnMouseOverEvent* args) override
 	{
-		if (editablePolygon->tam < 1 || !IsInsertPolygonEnable)
+		if (tempPolygon->tam < 1 || !IsInsertPolygonEnable)
 		{
 			return;
 		}
 
-		editablePolygon->SetPointPosition(Vector2(args->x, args->y), editablePolygon->tam - 1);
+		tempPolygon->SetPointPosition(Vector2(args->x, args->y), tempPolygon->tam - 1);
 	}
 
 private:
@@ -72,20 +74,24 @@ private:
 	{
 		if (args->button == 0)
 		{	
-			if (editablePolygon->tam > 2)
+			if (tempPolygon->tam == 0)
 			{
-				editablePolygon->RemoveLastPoint();
+				tempPolygon->points[0].push_back(args->x);
+				tempPolygon->points[1].push_back(args->y);
+				tempPolygon->tam++;
 			}
 
-			editablePolygon->AddPoint(Vector2(args->x, args->y));
-			editablePolygon->points[0].push_back(args->x);
-			editablePolygon->points[1].push_back(args->y);
-			editablePolygon->tam++;
+			if (editablePolygon->AddPoint(Vector2(args->x, args->y)))
+			{
+				tempPolygon->points[0].push_back(args->x);
+				tempPolygon->points[1].push_back(args->y);
+				tempPolygon->tam++;
+			}
 		}
 		else
 		{
-			editablePolygon->RemoveLastPoint();
 			editablePolygon = new EditablePolygon();
+			tempPolygon->Erase();
 		}
 	}
 };

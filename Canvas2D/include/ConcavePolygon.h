@@ -28,7 +28,7 @@ protected:
 	/// <summary>
 	/// insere os indices dos triangulos no vetor triangles usando o algoritmo ear-clipping
 	/// </summary>
-	void Triangulate();
+	bool Triangulate();
 
 	/// <summary>
 	/// verifica se o ponto pode ser adicionado ao poligono sem causar auto intersecção
@@ -50,7 +50,14 @@ private:
 	/// <summary>
 	/// tenta achar o triangulo válido mais próximo de i2, sendo o triangulo formador pelos vértices (i1,i2,i3)
 	/// </summary>
-	void FindValibleTriangle(int* i1, int* i3, int i2, std::vector<bool> ignoreIndex);
+	bool FindValibleTriangle(int* i1, int* i3, int i2, std::vector<bool> ignoreIndex);
+
+	/// <summary>
+	/// verifica se um ponto em cima de uma linha é um ponto do poligono
+	/// </summary>
+	/// <param name="p1"></param>
+	/// <returns></returns>
+	bool PointToLinePolygon(Vector2 p1);
 
 	void OnRender(OnRenderEvent* args) override
 	{

@@ -58,7 +58,8 @@ bool ConcavePolygon::IsValiblePoint(Vector2 point)
 	Vector2 p3 = point + dir2;
 	Vector2 p4 = lst - dir2;
 
-	return !(LineIntersectingCount(p1, p2, NULL) > 0 || LineIntersectingCount(p1, p2, NULL) > 0);
+	return !(LineIntersectingCount(p1, p2, NULL) > 0 || 
+			 LineIntersectingCount(p3, p4, NULL) > 0);
 }
 
 bool ConcavePolygon::IsValiblePolygon()
@@ -79,7 +80,7 @@ bool ConcavePolygon::IsValiblePolygon()
 }
 
 //acha dois vertices disponíveis que possam formar um triangulo com i2
-void ConcavePolygon::FindValibleTriangle(int* i1, int* i3, int i2, std::vector<bool> ignoreIndex)
+bool ConcavePolygon::FindValibleTriangle(int* i1, int* i3, int i2, std::vector<bool> ignoreIndex)
 {
 	*i3 = i2;
 	*i1 = i2;
@@ -111,18 +112,18 @@ void ConcavePolygon::FindValibleTriangle(int* i1, int* i3, int i2, std::vector<b
 			*i3 = 0;
 			*i1 = 0;
 
-			return;
+			return false;
 		}
 
-		return;
+		return true;
 	}
 }
 
-void ConcavePolygon::Triangulate() //implementação usando o algoritmo ear-clipping
+bool ConcavePolygon::Triangulate() //implementação usando o algoritmo ear-clipping
 {
-	if (tam < 3)
+	if (tam < 4)
 	{
-		return;
+		return true;
 	}
 
 	int valiblePoints = tam;
@@ -147,27 +148,44 @@ void ConcavePolygon::Triangulate() //implementação usando o algoritmo ear-clippi
 		int i1 = 0;
 		int i3 = 0;
 
-		FindValibleTriangle(&i1, &i3, i2, ignoreIndex);
-
-		Vector2 p1 = Vector2(points[0][i1], points[1][i1]);
-		Vector2 p2 = Vector2(points[0][i3], points[1][i3]);
-		Vector2 dir = p1 - p2;
-
-		dir.normalize();
-		p1 = p1 - dir;
-		p2 = p2 + dir;
-
-		if (LineToPolygon(p1, p2, &ignoreIndex)) //significa que a linha está totalmente dentro do polígono
+		if (!FindValibleTriangle(&i1, &i3, i2, ignoreIndex))
 		{
-			valiblePoints--;
-
-			triangles.push_back(i1);
-			triangles.push_back(i2);
-			triangles.push_back(i3);
-
-			ignoreIndex[i2] = true;
+			return false;
 		}
 
+		Vector2 p1 = Vector2(points[0][i1], points[1][i1]);
+		Vector2 p2 = Vector2(points[0][i2], points[1][i2]);
+		Vector2 p3 = Vector2(points[0][i3], points[1][i3]);
+		Vector2 dir;
+
+		if (Orientation(p1, p3, Vector2(points[0][i2], points[1][i2])) == 0) 
+		{
+			i2 = (i2 + 1) % tam;
+			continue;
+		}
+
+		if (p1 == p3 || p1 == p2 || p3 == p2)
+		{
+			i2 = (i2 + 1) % tam;
+			continue;
+		}
+
+		dir = p1 - p3;
+		dir.normalize();
+
+		if (!LineToPolygon(p1 - dir, p3 + dir, &ignoreIndex)) //significa que a linha está totalmente dentro do polígono
+		{
+			i2 = (i2 + 1) % tam;
+			continue;
+		}
+
+		valiblePoints--;
+
+		triangles.push_back(i1);
+		triangles.push_back(i2);
+		triangles.push_back(i3);
+
+		ignoreIndex[i2] = true;
 		i2 = (i2 + 1) % tam;
 	}
 
@@ -178,4 +196,6 @@ void ConcavePolygon::Triangulate() //implementação usando o algoritmo ear-clippi
 			triangles.push_back(i);
 		}
 	}
+
+	return true;
 }

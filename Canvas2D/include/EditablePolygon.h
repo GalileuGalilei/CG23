@@ -16,7 +16,7 @@ public:
 	
 	static Color selectedColor;
 
-	void AddPoint(Vector2 point);
+	bool AddPoint(Vector2 point);
 	void RemoveLastPoint();
 	void SetPointPosition(Vector2 pos, int index);
 	void Erase();
@@ -51,12 +51,11 @@ private:
 	{
 		if (!PointToPolygon(Vector2(args->x, args->y), NULL))
 		{
-			isSelected = false;
+			//isSelected = false;
 			return;
 		}
 
 		isSelected = true;
-		PushToFrontLayer();
 		EventManager::Instance()->InvokeEvent<OnToolEvent>((BaseEvent*) new OnToolEvent(this));
 	}
 
@@ -65,6 +64,11 @@ private:
 	void OnMouseOver(OnMouseOverEvent* args) override
 	{
 		lastMouseOverEvent = args;
+	}
+
+	GameLayer GetLayer() override
+	{
+		return GameLayer::Default;
 	}
 };
 

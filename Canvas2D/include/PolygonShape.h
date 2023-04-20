@@ -59,6 +59,9 @@ public:
 	/// </summary>
 	bool PointToPolygon(Vector2 point, std::vector<bool>* ignoreIndex);
 
+	int Orientation(Vector2 p1, Vector2 p2, Vector2 p3);
+
+	bool IsLineIntersecting(Vector2 p1, Vector2 p2, Vector2 q1, Vector2 q2);
 
 private:
 
