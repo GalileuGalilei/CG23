@@ -8,7 +8,7 @@ void ConcavePolygon::RenderTriangles()
 
 	if (tam < 4)
 	{
-		CV::polygon(x, y, tam);
+		CV::polygonFill(x, y, tam);
 		return;
 	}
 

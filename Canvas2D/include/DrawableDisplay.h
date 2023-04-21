@@ -6,106 +6,33 @@
 #include "gl_canvas2d.h"
 #include "Botao.h"
 #include "GameEvents.h"
+#include "Tools.h"
 
 /// <summary>
-/// Essa classe contém todas as funções e instâncias de calsses necessárias para criar e editar um polígono
+/// Essa classe contém todas as funções necessárias para criar e editar um polígono qualquer.
+/// Como ela é um pouco mais complexa que as outras ferramentas(ITools), ela foi separada em um arquivo próprio.
 /// </summary>
-class DrawableDisplay : IClickable
+class DrawTool : ITool, IClickable
 {
 private:
 	Vector2 position;
 	Vector2 size;
-	EditablePolygon* editablePolygon;
-	EditablePolygon* tempPolygon;
-	static std::list<EditablePolygon*> drawnPolygons;
-	const char* savePath = "figuras.gr";
 
-	bool IsInsertPolygonEnable = true;
+	EditablePolygon* editablePolygon;
+	PolygonShape* previewPolygon;
+	const Color previewColor = Color(0.8, 0.2, 0.8);
+
+	bool CheckBounds(int x, int y);
+	void AddPoint(OnClickEvent* args);
+	void AddPreviewPoint(OnClickEvent* args);
 
 public:
 
-	DrawableDisplay(Vector2 position, Vector2 size)
-	{
-		this->position = position;
-		this->size = size;
-		LoadDisplay();
-		editablePolygon = new EditablePolygon();
-		tempPolygon = new EditablePolygon();
-	}
-
-	static void DeletePolygon(PolygonShape* polygon)
-	{
-		EditablePolygon* p = (EditablePolygon*) polygon;
-
-		for (auto i : drawnPolygons)
-		{
-			if (i == p)
-			{
-				drawnPolygons.remove(i);
-				delete(i);
-				break;
-			}
-		}
-	}
-	
-	void SetState(bool state)
-	{
-		IsInsertPolygonEnable = state;
-	}
-
-	//escreva uma função que salve todos os poligonos da lista 	std::list<EditablePolygon*> drawnPolygons em um arquivo
-	void SaveDisplay()
-	{
-		FILE* f;
-		fopen_s(&f, savePath, "wb");
-		
-		for (auto polygon : drawnPolygons)
-		{
-			PolygonData data = polygon->GetData();
-			fwrite(&data, sizeof(PolygonData), 1, f);
-			fwrite(polygon->points[0].data(), sizeof(float), data.tam, f);
-			fwrite(polygon->points[1].data(), sizeof(float), data.tam, f);
-		}
-		fclose(f);
-	}
-
-	void LoadDisplay()
-	{
-		FILE* f;
-		fopen_s(&f, savePath, "rb");
-		
-		if (f == NULL)
-		{
-			return;
-		}
-
-		while (!feof(f))
-		{
-			PolygonData data;
-			fread(&data, sizeof(PolygonData), 1, f);
-
-			if (data.tam < 1)
-			{
-				break;
-			}
-
-			std::vector<float> x(data.tam);
-			std::vector<float> y(data.tam);
-
-			fread(x.data(), sizeof(float), data.tam, f);
-			fread(y.data(), sizeof(float), data.tam, f);
-
-			EditablePolygon* polygon = new EditablePolygon();
-			polygon->LoadData(data, x, y);
-			drawnPolygons.push_back(polygon);
-		}
-		
-		fclose(f);
-	}
+	DrawTool(Vector2 position, Vector2 size);
 
 	void OnClick(OnClickEvent* args) override
 	{
-		if (!CheckBounds(args->x, args->y) || !IsInsertPolygonEnable)
+		if (!CheckBounds(args->x, args->y))
 		{
 			return;
 		}
@@ -115,55 +42,24 @@ public:
 
 	void OnMouseOver(OnMouseOverEvent* args) override
 	{
-		if (tempPolygon->tam < 1 || !IsInsertPolygonEnable)
+		if (previewPolygon->tam < 1)
 		{
 			return;
 		}
 
-		tempPolygon->SetPointPosition(Vector2(args->x, args->y), tempPolygon->tam - 1);
+		int tam = previewPolygon->tam;
+		previewPolygon->points[0][tam - 1] = args->x;
+		previewPolygon->points[1][tam - 1] = args->y;
 	}
 
-private:
-
-	bool CheckBounds(int x, int y)
+	void RemoveToolListeners() override
 	{
-		if (x > position.x + size.x || x < position.x)
-		{
-			return false;
-		}
-
-		if (y > position.y + size.y || y < position.y)
-		{
-			return false;
-		}
-
-		return true;
+		RemoveClickListener();
 	}
 
-	void AddPoint(OnClickEvent* args)
+	void AddToolListeners() override
 	{
-		if (args->button == 0)
-		{	
-			if (tempPolygon->tam == 0)
-			{
-				tempPolygon->points[0].push_back(args->x);
-				tempPolygon->points[1].push_back(args->y);
-				tempPolygon->tam++;
-			}
-
-			if (editablePolygon->AddPoint(Vector2(args->x, args->y)))
-			{
-				tempPolygon->points[0].push_back(args->x);
-				tempPolygon->points[1].push_back(args->y);
-				tempPolygon->tam++;
-			}
-		}
-		else
-		{
-			drawnPolygons.push_back(editablePolygon);
-			editablePolygon = new EditablePolygon();
-			tempPolygon->Erase();
-		}
+		AddClickListener();
 	}
 };
 

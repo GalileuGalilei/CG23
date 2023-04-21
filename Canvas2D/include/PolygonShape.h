@@ -33,7 +33,8 @@ public:
 	void SetColor(float r, float g, float b);
 	void Fill();
 
-	friend class DrawableDisplay;
+	friend class SaveTool;
+	friend class DrawTool;
 
 	PolygonShape(std::vector<Vector2> points);
 

@@ -2,7 +2,10 @@
 #include "EventManager.h"
 #include "ColorDisplay.h"
 #include "PolygonShape.h"
-//gameevent -> polygonshape -> gameevent(tool)
+
+/// <summary>
+/// Esse arquivo contem todas as classes que representam as ferramentas do programa assim como seus eventos.
+/// </summary>
 
 class OnToolEvent : public BaseEvent
 {
@@ -44,14 +47,16 @@ public:
 	}
 
 protected:
+	static PolygonShape* selectedPolygon;
+	static std::list<PolygonShape*> polygonList;
+
+	virtual void RemoveToolListeners() = 0;
+	virtual void AddToolListeners() = 0;
+
 	ITool()
 	{
 		toolList.push_back(this);
 	}
-
-	static PolygonShape* selectedPolygon;
-	virtual void RemoveToolListeners() = 0;
-	virtual void AddToolListeners() = 0;
 };
 
 
@@ -151,4 +156,20 @@ public:
 	{
 		EventManager::Instance()->AddListener<OnKeyEvent>(OnDeleteTool);
 	}
+};
+
+class SaveTool : public ITool
+{
+public:
+	static void OnSaveTool(BaseEvent* baseEvent);
+	static char savePath[];
+
+	/// <summary>
+	/// Quando a ferramenta é criada, já carrega os dados salvos
+	/// </summary>
+	SaveTool();
+
+	//não há necesseidade de remover/adicionar listeners, pois essa ferramenta é usada apenas pelo botão
+	void RemoveToolListeners() override{}
+	void AddToolListeners() override {}
 };

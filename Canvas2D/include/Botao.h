@@ -10,11 +10,13 @@ private:
 	std::function<void()> callback;
 
 protected:
-    const float mouseOverColorChange = 0; //o quanto a cor escurece 
 
+	const float offset = 0.2f;
 	char label[100];
 	bool isMouseOver = false;
 	Color color;
+	Color normalColor;
+	Color pressedColor;
 	Vector2 position, size;
 
 public:
@@ -25,7 +27,10 @@ public:
      this->position = position;
 	 this->size = size;
      this->color = color;
+	 normalColor = color;
 	 this->callback = callback;
+
+	 pressedColor = Color(color.r - offset, color.g - offset, color.b - offset);
   }
 
   void OnRender(OnRenderEvent* args) override
@@ -40,9 +45,11 @@ public:
   {
 	  if (!CheckBounds(args->x, args->y))
 	  {
+		  color = normalColor;
 		  return;
 	  }
 	  
+	  color = pressedColor;
 	  callback();
   }
 

@@ -161,9 +161,21 @@ int PolygonShape::LineIntersectingCount(Vector2 p1, Vector2 p2, std::vector<bool
 
 bool PolygonShape::PointToPolygon(Vector2 point, std::vector<bool>* ignoreIndex)
 {
-	if (tam < 3)
+	if (tam == 0)
 	{
 		return false;
+	}
+
+	if (tam == 1)
+	{
+		return point == Vector2(points[0][0], points[1][0]);
+	}
+
+	if (tam == 2)
+	{
+		Vector2 p1 = Vector2(points[0][0], points[1][0]);
+		Vector2 p2 = Vector2(points[0][1], points[1][1]);
+		return Orientation(point, p1, p2) == 0;
 	}
 
 	Vector2 horizontal = Vector2(100000, point.y); //linha que vai de um ponto muito distante no eixo x até o ponto

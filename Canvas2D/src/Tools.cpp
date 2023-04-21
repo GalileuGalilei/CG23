@@ -2,13 +2,13 @@
 #include "DrawableDisplay.h"
 
 std::list<ITool*> ITool::toolList;
+std::list<PolygonShape*> ITool::polygonList;
 PolygonShape* ITool::selectedPolygon = NULL; 
 
 EventType OnToolEvent::GetStaticType()
 {
 	return EventType::ToolEvent;
 }
-
 
 void FillTool::OnFillTool(BaseEvent* baseEvent)
 {
@@ -133,10 +133,67 @@ void DeleteTool::OnDeleteTool(BaseEvent* baseEvent)
 	}
 
 	OnKeyEvent* args = (OnKeyEvent*)baseEvent;
-	
+
 	if (args->key == 127 && args->state == 0)
 	{
-		DrawableDisplay::DeletePolygon(selectedPolygon);
+		EditablePolygon* p = (EditablePolygon*)selectedPolygon;
+		polygonList.remove(p);
+		delete(p);
 		selectedPolygon = NULL;
 	}
+}
+
+char SaveTool::savePath[] = "figuras.gr";
+
+void SaveTool::OnSaveTool(BaseEvent* baseEvent)
+{
+	FILE* f;
+
+	fopen_s(&f, savePath, "wb");
+
+	for (auto polygon : polygonList)
+	{
+		EditablePolygon* editable = (EditablePolygon*)polygon;
+		PolygonData data = editable->GetData();
+		fwrite(&data, sizeof(PolygonData), 1, f);
+		fwrite(editable->points[0].data(), sizeof(float), data.tam, f);
+		fwrite(editable->points[1].data(), sizeof(float), data.tam, f);
+	}
+	fclose(f);
+
+	selectedPolygon = NULL;
+}
+
+SaveTool::SaveTool()
+{
+	FILE* f;
+	fopen_s(&f, savePath, "rb");
+
+	if (f == NULL)
+	{
+		return;
+	}
+
+	while (!feof(f))
+	{
+		PolygonData data;
+		fread(&data, sizeof(PolygonData), 1, f);
+
+		if (data.tam < 1)
+		{
+			break;
+		}
+
+		std::vector<float> x(data.tam);
+		std::vector<float> y(data.tam);
+
+		fread(x.data(), sizeof(float), data.tam, f);
+		fread(y.data(), sizeof(float), data.tam, f);
+
+		EditablePolygon* polygon = new EditablePolygon();
+		polygon->LoadData(data, x, y);
+		polygonList.push_back(polygon);
+	}
+
+	fclose(f);
 }

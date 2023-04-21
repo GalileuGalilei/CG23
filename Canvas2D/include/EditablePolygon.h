@@ -83,11 +83,12 @@ private:
 	{
 		if (!PointToPolygon(Vector2(args->x, args->y), NULL))
 		{
-			//isSelected = false;
+			isSelected = false;
 			return;
 		}
 
 		isSelected = true;
+		PushToFrontLayer();
 		EventManager::Instance()->InvokeEvent<OnToolEvent>((BaseEvent*) new OnToolEvent(this));
 	}
 

@@ -14,39 +14,25 @@
 #include "GameEvents.h"
 #include "DrawableDisplay.h"
 #include "ToolBar.h"
-#include "PolygonShape.h" //refatorar nome
+#include "PolygonShape.h" 
 
-
-
-//funcao chamada continuamente. Deve-se controlar o que desenhar por meio de variaveis
-//globais que podem ser setadas pelo metodo keyboard()
 void render()
 {
     EventManager::Instance()->InvokeEvent<OnRenderEvent>((BaseEvent*) new OnRenderEvent());
 }
 
-
-//funcao chamada toda vez que uma tecla for pressionada
 void keyboard(int key)
 {
-   //printf("\nClicou Tecla: %d" , key);
 	EventManager::Instance()->InvokeEvent<OnKeyEvent>((BaseEvent*) new OnKeyEvent(key, 0));
 }
 
-
-//funcao chamada toda vez que uma tecla for liberada
 void keyboardUp(int key)
 {
-   //printf("\nLiberou Tecla: %d" , key);
     EventManager::Instance()->InvokeEvent<OnKeyEvent>((BaseEvent*) new OnKeyEvent(key, 1));
 }
 
-
-//funcao para tratamento de mouse: cliques, movimentos e arrastos
 void mouse(int button, int state, int wheel, int direction, int x, int y)
 {
-  //  printf("\nMouse: %d, %d, %d, %d, %d, %d", button, state, wheel, direction, x, y);
-
     if (state == 1)
     {
         EventManager::Instance()->InvokeEvent<OnClickEvent>((BaseEvent*) new OnClickEvent(button, state, x, y));
@@ -57,13 +43,12 @@ void mouse(int button, int state, int wheel, int direction, int x, int y)
 
 int main(void)
 {
-    int screenWidth = 500, screenHeight = 500;
+    int screenWidth = 800, screenHeight = 500;
 
     EventManager::Instance()->AddListener<OnRenderEvent>(IRenderable::RenderAll);
     EventManager::Instance()->AddListener<OnClickEvent>(IClickable::ClickAll);
     EventManager::Instance()->AddListener<OnMouseOverEvent>(IClickable::MouseOverAll);
-    DrawableDisplay display = DrawableDisplay(Vector2(75, 40), Vector2(450, 450));
-    ToolBar toolBar = ToolBar(&display, Vector2(0, 0), Vector2(70, screenHeight), 5);
+    ToolBar toolBar = ToolBar(screenWidth, screenHeight, 70, 5);
 
     CV::init(&screenWidth, &screenHeight, "Canvas 2D");
     CV::run();
