@@ -30,9 +30,6 @@
     <ClCompile Include="Canvas2D\src\PolygonShape.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="Canvas2D\src\Relogio.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
     <ClCompile Include="Canvas2D\src\DrawableDisplay.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
@@ -46,6 +43,9 @@
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
     <ClCompile Include="Canvas2D\src\Tools.cpp">
+      <Filter>Arquivos de Origem</Filter>
+    </ClCompile>
+    <ClCompile Include="Canvas2D\src\ColorDisplay.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,9 +71,6 @@
     <ClInclude Include="Canvas2D\include\PolygonShape.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Canvas2D\include\Relogio.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Canvas2D\include\Vector2.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
@@ -90,6 +87,9 @@
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
     <ClInclude Include="Canvas2D\include\Tools.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="Canvas2D\include\ColorDisplay.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
   </ItemGroup>
